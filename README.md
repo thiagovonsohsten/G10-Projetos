@@ -1,2 +1,2 @@
-# G10-Projetos2
+# G10-Projetos
 Repositório do grupo Agilis - Projetos 2 César School.
