@@ -1,4 +1,5 @@
 //Sitema para acessar o banco de dados.
+    //Acessa o banco de dados ou arquivo externo que ainda precisa ser criado
 #include <stdio.h>      //biblioteca padrão
 #include <stdlib.h>     //Fornece funções como alocação de memória dinâmica, conversão de strings, geração de números aleatórios, entre outras
 #include <string.h>     //Fornece funções para manipulação de strings, como copiar, concatenar, comparar e buscar.

@@ -1,4 +1,5 @@
 //Artefato que irá se comunicar com a central/app/sistema/aplicação
+    //Falta definir alguns detalhes como hardware e passagem de informações
 #include <stdio.h>      //biblioteca padrão
 #include <stdlib.h>     //Fornece funções como alocação de memória dinâmica, conversão de strings, geração de números aleatórios, entre outras
 #include <string.h>     //Fornece funções para manipulação de strings, como copiar, concatenar, comparar e buscar.

@@ -1,4 +1,5 @@
-//Central/APP/Sistema/Aplicação que irá receber a emnsagem do artefato e irá gerenciar os dados, lembrando que serão acessados pelos residentes, preceptores e gestão do hospital.
+//Central/APP/Sistema/Aplicação que irá receber a mensagem do artefato e irá gerenciar os dados, lembrando que serão acessados pelos residentes, preceptores e gestão do hospital.
+    //Recebe os dados e altera quando reccbe a segunda informação de data
 #include <stdio.h>      //biblioteca padrão
 #include <stdlib.h>     //Fornece funções como alocação de memória dinâmica, conversão de strings, geração de números aleatórios, entre outras
 #include <string.h>     //Fornece funções para manipulação de strings, como copiar, concatenar, comparar e buscar.
