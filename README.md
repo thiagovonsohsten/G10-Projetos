@@ -37,4 +37,3 @@ Fluxograma de Arquitetura dos códigos _______
     SistemaAcesso.projetos10.c
 
         Nesse sistema será de forma simplificada, terá 3 funções para cada usuário, residente, médico e gestor, cada função será alterada para diversas opções, sempre buscando os dados de um arquivo externo e trabalhando em cima dele, e salvando após as alterações. Apenas o ‘Sistema Principal.projetos10.c’ e o nível 3 (Gestor) terão como alterar o banco de dados, o restante terá apenas uma visualização do banco de dados.
-
