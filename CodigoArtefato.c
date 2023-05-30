@@ -65,7 +65,7 @@ int main () {
                         //Sim -> Salva na última posição da lista.
             // if enviar
                 //HEAD existe?
-                    //Sim -> manda todos e zera a lista deixando o head apontando pra NULL.
+                    //Sim -> manda todos e zera a lista deixando o head apontando pra NULL. Remove como uma fila.
                     //Não -> Envia.
                 
     }
