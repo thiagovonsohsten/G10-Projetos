@@ -28,19 +28,20 @@ struct medico {
 
 int residente(int id, int nivel);
 int medico(int id, int nivel);
-int gestor(int id, int nivel);
+int adm(int id, int nivel);
 struct dados encontra_aluno_por_id(int id_aluno);
 
 int main (){
     int id,nivel;
+    //ARBIR ARQUIVO PARA SIMULAR O BANCO DE DADOS
     scanf("Insira seu Código: %d",&id);
-    scanf("Aluno(1), Professor (2) ou Gestor (3)? %d",&nivel);
+    scanf("Aluno(1), Professor (2) ou adm (3)? %d",&nivel);
     if (nivel==1){
         residente(id, nivel);
     }else if (nivel ==2){
         medico(id, nivel);
     }else if (nivel == 3){
-        gestor(id, nivel);
+        adm(id, nivel);
     }else{
         printf("Nível ou código Incorretos!");
     }
@@ -51,7 +52,7 @@ int residente (id, nivel) {
     //busca nos arquivos o id e nível
     struct dados Residente;
     struct historico *ata_de_presenca;
-        //A título de desenvolvimento irei acrescentar os dados manualmente, mas deverá ser recolhido pelo banco de dados em uma busca pelo id e nivel
+    //A título de desenvolvimento irei acrescentar os dados manualmente, mas deverá ser recolhido pelo banco de dados em uma busca pelo id e nivel
     strcpy(Residente.cpf,"000.000.000-02");
     Residente.id=21452;
     strcpy(Residente.nome,"Jacinto Paulo Muse");
@@ -157,7 +158,7 @@ int medico (id, nivel) {
     return 0;
 }
 
-int gestor (id, nivel) {
+int adm (id, nivel) {
     // Importar todos os dados do banco de dados para conseguir trabalhar neles
     int opcao;
     while (1) {
@@ -189,7 +190,7 @@ int gestor (id, nivel) {
                 break;
             case 5:
                 // Sair
-                printf("Encerrando sessao do gestor...\n");
+                printf("Encerrando sessao do adm...\n");
                 return 0;
             default:
                 printf("Opcao invalida. Tente novamente.\n");
