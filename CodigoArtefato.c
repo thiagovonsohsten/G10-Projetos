@@ -4,7 +4,7 @@
 #include <stdlib.h>     //Fornece funções como alocação de memória dinâmica, conversão de strings, geração de números aleatórios, entre outras
 #include <string.h>     //Fornece funções para manipulação de strings, como copiar, concatenar, comparar e buscar.
 #include <time.h>       //Biblioteca do C que contém funções para manipulação de tempo e data, como a função time(), que retorna o número de segundos desde a "época" (1 de janeiro de 1970).
-
+#include "bibliotecaFready.h"
                                                                                 //#include <winsock2.h>   //Biblioteca fornece as definições necessárias para a criação, conexão e comunicação de sockets em rede utilizando o protocolo TCP/IP. Ela é essencial para o código já que é responsável pela comunicação entre o artefato e o servidor na aplicação!
                                                                                 //#include <windows.h>    //Não precisaria colocar essa biblioteca, contudo é bom destacar que estarei utilizando o sistema operacional do windowns.
                                                                                 //#include <wiringPi.h>   Biblioteca que contém funções para conversão de endereços IP entre formatos numéricos e de strings. Utilizado para o Hardware que consideramos, o Raspberry Pi. Pode ser alterado posteriormente.
@@ -14,12 +14,6 @@
                                                                                                 //pode ser alterado ou removido.
                                                                                 //#define LOW 0   //O mesmo do HIGH
 
-struct presenca {
-    char email[50];
-    time_t tempo;
-    struct presenca *next;
-};
-
 int main () {
                                                                                 // Configurando os pinos de entrada, utilizando o GPIO para se comunicar com sensores ou outros dispositivos.
                                                                                 // HANDLE dispositivoGPIO = CreateFile("Endereço do GPIO", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -28,8 +22,8 @@ int main () {
                                                                                 //     printf("Erro ao acessar GPIO.\n");
                                                                                 //     return 1;
                                                                                 // }
-    struct presenca *head=NULL;
-    struct presenca *lista=NULL;
+    presenca *head=NULL;
+    presenca *lista=NULL;
                                                                                 // Loop principal infinito
                                                                                 //while (1) {
         //Simulando o recebimento desses dados (E-mail e tempo) por aquivo, dados esse que seria enviado pelo Hardware Raspberry Pi
@@ -44,7 +38,7 @@ int main () {
             //printf("Entrou no while\n");
             if (head == NULL) {
             //printf("Entrou no if\n");
-                head = (struct presenca*)malloc(sizeof(struct presenca));
+                head = (presenca*)malloc(sizeof(presenca));
                 fscanf(artefato, "%s\n", head->email);
                 lista=head;
                 head->next=NULL;
@@ -54,7 +48,7 @@ int main () {
                 while (lista->next != NULL) {
                     lista = lista->next;
                 }
-                lista->next = (struct presenca*)malloc(sizeof(struct presenca));
+                lista->next = (presenca*)malloc(sizeof(presenca));
                 lista = lista->next;
                 fscanf(artefato, "%s\n", lista->email);
                 //printf(lista->email);
