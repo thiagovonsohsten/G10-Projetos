@@ -137,8 +137,10 @@ void lg_medico (char email, char papel) {
     liberar_lista_alunos(alunos);
 }
 
-int lg_adm (char email, char papel) {
+void lg_adm (char email, char papel) {
     // Importar todos os residente do banco de residente para conseguir trabalhar neles
+    lista_aluno* lista_atual_residente=NULL;
+    lista_medico* lista_atual_preceptor=NULL;
     int opcao;
     while (1) {
         printf("\nEscolha uma opcao:\n");
