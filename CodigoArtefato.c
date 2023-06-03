@@ -7,10 +7,8 @@
                                                                                 //#include <winsock2.h>   //Biblioteca fornece as definições necessárias para a criação, conexão e comunicação de sockets em rede utilizando o protocolo TCP/IP. Ela é essencial para o código já que é responsável pela comunicação entre o artefato e o servidor na aplicação!
                                                                                 //#include <windows.h>    //Não precisaria colocar essa biblioteca, contudo é bom destacar que estarei utilizando o sistema operacional do windowns.
                                                                                 //#include <wiringPi.h>   Biblioteca que contém funções para conversão de endereços IP entre formatos numéricos e de strings. Utilizado para o Hardware que consideramos, o Raspberry Pi. Pode ser alterado posteriormente.
-
                                                                                 //#define SERVER_IP "192.168.0.100" // IP do servidor/app
                                                                                 //#define SERVER_PORT 8080 // Porta do servidor/app
-
                                                                                 //#define HIGH 1  //A biblioteca que daria esses valores seria o wiringPi, como estamos assumindo um hardware, 
                                                                                                 //pode ser alterado ou removido.
                                                                                 //#define LOW 0   //O mesmo do HIGH
@@ -31,54 +29,64 @@ int main () {
                                                                                 // }
     struct presenca *head=NULL;
     struct presenca *lista=NULL;
-    char entrada [100];
                                                                                 // Loop principal infinito
                                                                                 //while (1) {
         //Simulando o recebimento desses dados (E-mail e tempo) por aquivo, dados esse que seria enviado pelo Hardware Raspberry Pi
-    FILE *artefato,*ata;
-        artefato = fopen ("artefato.txt","r"); 
-        if (artefato == NULL){
-            printf("Arquivo Nulo!");
-            fclose(artefato);
-        }else {
-            fgets(entrada, sizeof(entrada),artefato);
-            fclose(artefato);
-            if (head==NULL){
-                head=(struct presenca *)malloc(sizeof(struct presenca));
-                sscanf(entrada,"%[^,],%ld", head->email,&(head->tempo));
-                head->next=(struct presenca *)malloc(sizeof(struct presenca));
-            }else{
+    FILE* artefato;
+    artefato = fopen("artefato.txt", "r");
+    if (artefato == NULL) {
+        printf("Arquivo Nulo!");
+        fclose(artefato);
+    } else {
+            //printf("Entrou no else\n");
+        while (!feof(artefato)) {
+            //printf("Entrou no while\n");
+            if (head == NULL) {
+            //printf("Entrou no if\n");
+                head = (struct presenca*)malloc(sizeof(struct presenca));
+                fscanf(artefato, "%s\n", head->email);
+                lista=head;
+                head->next=NULL;
+                //printf(head->email);
+            } else {
                 lista = head;
-                while (lista->next!=NULL){
-                    lista=lista->next;
+                while (lista->next != NULL) {
+                    lista = lista->next;
                 }
-                lista->next = (struct presenca *)malloc(sizeof(struct presenca));
-                lista=lista->next;
-                lista->next = (struct presenca *)malloc(sizeof(struct presenca));
-                sscanf(entrada,"%s,%ld", lista->email,&(lista->tempo));
+                lista->next = (struct presenca*)malloc(sizeof(struct presenca));
+                lista = lista->next;
+                fscanf(artefato, "%s\n", lista->email);
+                //printf(lista->email);
+                lista->next=NULL;
             }
+            fscanf(artefato, "%ld\n", &(lista->tempo));
+            //printf("%ld",lista->tempo);
         }
-        if (head->next==NULL){
-            ata = fopen ("ata.txt","a");
-            fprintf(ata, "%s,",head->email);
-            fprintf(ata, "%ld\n",(long int)head->tempo);
-            fclose(ata);
-            //free(head);
-        }else {
-             lista = head;
-            while (lista->next!=NULL){
-                lista=lista->next;
-            }
-                ata = fopen ("ata.txt","a");
-                fprintf(ata, "%s,",lista->email);
-                fprintf(ata, "%ld\n",(long int)lista->tempo);
-                fclose(ata);
-                //free(lista);
+        fclose(artefato);
+    }
+    //printf("saiu do else\n");
+    // lista=head;
+    // while (lista->next != NULL) {
+    //     printf("%s\n",lista->email);
+    //     printf("%ld\n",lista->tempo);
+    //     lista = lista->next;
+    //     printf("Printando muito loko!\n");
+    // }
+    // printf("Saiu do print loko\n");
+    FILE* ata;
+    if (head == NULL) {
+        printf("Lista vazia!");
+    } else {
+        ata = fopen("ata.txt", "w");
+        while (head!=NULL){
+            lista = head;
+            fprintf(ata, "%s\n", lista->email);
+            fprintf(ata, "%ld\n", lista->tempo);
+            head=head->next;
+            free(lista);
         }
-
-
-        // Identificação do usuário
-        
+        fclose(ata);
+    }
                                                                                 // enviar.id = 0;
                                                                                 // while (digitalRead(PINO_SENSOR_USURARIO) == LOW) { //enquanto o hardware não identificar alguma pessoa irá no loop infinito.
                                                                                 //     delay(100);
@@ -87,19 +95,16 @@ int main () {
                                                                                 //  Então lê o valor do sensor e converte para um ID de usuário
                                                                                 //  Claro que estamos considerando que todo o processo de identificação será realizado pelo hardware que poderá utilizar os dados do nosso servidor/app/aplicação
                                                                                 //enviar.id = analogRead(PINO_SENSOR_USURARIO); // Muito cuidado nessa conversão, dependendo do hardware que escolhermos, poderá haver erros de tamanho dos bytes por conta do sensor.
-
                                                                                 // Tempo de espera para o preceptor realizar o cancelamento
                                                                                 // int tempo_de_cancelamento = 0; //Uma variável apenas parar marcar o tempo que as pessoas cancelam, caso seja próximo dos 5s, podemos aumentar o tempo para não ficar muito corrido para o usuário.
                                                                                 // while (digitalRead(CANCELAR_PINO) == HIGH && tempo_de_cancelamento < 5000) {
                                                                                 //     delay(100);
                                                                                 //     tempo_de_cancelamento += 100;
                                                                                 // }
-
                                                                                 //  Nesta etapa do nosso artefato, nós já recebemos o id do usuário e sua confirmação, 
                                                                                 //  precisamos criar nosso pacote de dados para ser enviada para a fila
                                                                                 //enviar.tempo=time(NULL);
                                                                                 //o artefato irá enviar os dados, e o sistema irá identificar se é o tempo inicial ou final apenas verificando pela ordem de envio.
-
                                                                                 // Envia as informações para o servidor/app
                                                                                     // if não enviar
                                                                                         //salva
@@ -109,8 +114,7 @@ int main () {
                                                                                     // if enviar
                                                                                         //HEAD existe?
                                                                                             //Sim -> manda todos e zera a lista deixando o head apontando pra NULL. Remove como uma fila.
-                                                                                            //Não -> Envia.
-                
+                                                                                            //Não -> Envia.        
     //CloseHandle(dispositivoGPIO); //Fechando a lista e liberando espaço de memória (os professores de PIF agradecem!)
     return 0;
 }
