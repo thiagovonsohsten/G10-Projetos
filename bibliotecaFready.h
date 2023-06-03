@@ -13,27 +13,31 @@ typedef struct {
     struct historico *next;
 }historico;
 typedef struct {
-    char matricula[20];
+    char nome [101];
     char email [20];
+    char cpf [12];
     char papel[10]; //residente,preceptor,adm
     char email_preceptor[20]; // id do preceptor que está supervisionando o residente
-    char nome [101];
-    char curso [20];
-    char cpf [12];
+    char especializacao [20];
     //Acrescentar possível imagem para o sensor
     struct historico *Head;
 }residente;
 typedef struct {
-    char matricula[20];
+    char nome [101];
     char email [20];
+    char cpf [12];
     char papel[10]; //residente,preceptor,adm
     char CRM [14]; // CRM/PE 111111
-    char nome [101];
-    char curso [20];
-    char cpf [12];
+    char especializacao [20];
     //Acrescentar possível imagem para o sensor
 }medico;
 
+typedef struct {
+    char nome[101];
+    char email[20];
+    char cpf[12];
+    char papel[10];
+}adm;
 typedef struct {
     residente aluno;
     lista_aluno* next;
