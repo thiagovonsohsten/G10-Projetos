@@ -22,8 +22,8 @@ int main () {
                                                                                 //     printf("Erro ao acessar GPIO.\n");
                                                                                 //     return 1;
                                                                                 // }
-    presenca *head=NULL;
-    presenca *lista=NULL;
+    presenca* head=NULL;
+    presenca* lista=NULL;
                                                                                 // Loop principal infinito
                                                                                 //while (1) {
         //Simulando o recebimento desses dados (E-mail e tempo) por aquivo, dados esse que seria enviado pelo Hardware Raspberry Pi
@@ -44,9 +44,9 @@ int main () {
                 head->next=NULL;
                 //printf(head->email);
             } else {
-                lista = head;
+                lista=head;
                 while (lista->next != NULL) {
-                    lista = lista->next;
+                    lista=lista->next;
                 }
                 lista->next = (presenca*)malloc(sizeof(presenca));
                 lista = lista->next;
