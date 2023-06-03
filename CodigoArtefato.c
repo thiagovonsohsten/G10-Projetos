@@ -4,6 +4,7 @@
 #include <stdlib.h>     //Fornece funções como alocação de memória dinâmica, conversão de strings, geração de números aleatórios, entre outras
 #include <string.h>     //Fornece funções para manipulação de strings, como copiar, concatenar, comparar e buscar.
 #include <time.h>       //Biblioteca do C que contém funções para manipulação de tempo e data, como a função time(), que retorna o número de segundos desde a "época" (1 de janeiro de 1970).
+
                                                                                 //#include <winsock2.h>   //Biblioteca fornece as definições necessárias para a criação, conexão e comunicação de sockets em rede utilizando o protocolo TCP/IP. Ela é essencial para o código já que é responsável pela comunicação entre o artefato e o servidor na aplicação!
                                                                                 //#include <windows.h>    //Não precisaria colocar essa biblioteca, contudo é bom destacar que estarei utilizando o sistema operacional do windowns.
                                                                                 //#include <wiringPi.h>   Biblioteca que contém funções para conversão de endereços IP entre formatos numéricos e de strings. Utilizado para o Hardware que consideramos, o Raspberry Pi. Pode ser alterado posteriormente.
