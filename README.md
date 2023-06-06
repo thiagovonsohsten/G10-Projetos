@@ -1,7 +1,7 @@
 # G10-Projetos
-Este é o repositório do grupo 10 - AgilisTech;
+Este é o repositório do grupo 10 da cadeira de Projetos 2 da César School - AgilisTech;
 
-AgilisTech: É uma empresa de tecnologia que cria soluções inovadoras para resolver as dores e problemas dos nossos clientes. Possuímos uma equipe multidisciplinar altamente qualificada e apaixonada por tecnologia, buscamos constantemente novas tecnologias para criar softwares excepcionais que superem as expectativas dos clientes. Acreditamos na inovação como motor da mudança e estamos comprometidos em liderar a revolução tecnológica.
+AgilisTech: É uma empresa de tecnologia que cria soluções inovadoras para resolver as dores e problemas dos nossos clientes. Possuímos uma equipe multidisciplinar altamente qualificada e apaixonada por tecnologia, buscamos constantemente novas tecnologias para criar softwares excepcionais que superem as expectativas dos clientes. Acreditamos na inovação como motor da mudança e estamos comprometidos em liderar a revolução tecnológica;
 
 Quem somos:https://sites.google.com/cesar.school/agilistechinovacaoetecnologia/nosso-time?authuser=3
 
@@ -37,3 +37,6 @@ Fluxograma de Arquitetura dos códigos _______
     SistemaAcesso.projetos10.c
 
         Nesse sistema será de forma simplificada, terá 3 funções para cada usuário, residente, médico e gestor, cada função será alterada para diversas opções, sempre buscando os dados de um arquivo externo e trabalhando em cima dele, e salvando após as alterações. Apenas o ‘Sistema Principal.projetos10.c’ e o nível 3 (Gestor) terão como alterar o banco de dados, o restante terá apenas uma visualização do banco de dados.
+=======
+Quem somos:https://sites.google.com/cesar.school/agilistechinovacaoetecnologia/nosso-time?authuser=3;
+
