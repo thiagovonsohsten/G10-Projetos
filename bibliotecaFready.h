@@ -3,14 +3,14 @@
 #include <time.h>
 
 //Lista de presença
-typedef struct {
+typedef struct presenca{
     char email[20];
     time_t tempo;
     struct presenca *next;
 }presenca;
 
 //lista para o histórico de cada preceptor
-typedef struct {
+typedef struct historico{
     time_t entrada;
     time_t saida;
     struct historico *next;
@@ -58,4 +58,13 @@ typedef struct {
     medico preceptor;
     struct lista_medico *next;
 }lista_medico;
+
+residente encontrar_aluno_por_email(char email);
+
+void lg_residente(char email, char papel);
+
+void lg_medico(char email, char papel);
+
+void lg_adm(char email, char papel);
+
 #endif
