@@ -6,6 +6,9 @@
 #include <time.h>       //Biblioteca do C que contém funções para manipulação de tempo e data, como a função time(), que retorna o número de segundos desde a "época" (1 de janeiro de 1970).
 #include <windows.h>    //Não precisaria colocar essa biblioteca, contudo é bom destacar que estarei utilizando o sistema operacional do windowns.
 
+//Responsável por contar as horas de cada estudando
+//recebe o arquivo "ata.txt" e envia "presenca.txt"
+
 //struct da mensagem
 struct mensagem {
     int id;
@@ -23,10 +26,7 @@ struct ata *Head=NULL;
 int main () {
     struct mensagem Request;
     FILE* ata;
-    while (1){
-    //Recebe os dados do Artefato (para efeito da lógica, iremos considerar uma variávelde struct mensagem)
-    Request.id = 20485;
-    Request.tempo=time(NULL); //Estamos considerando apenas a data de hoje, sem maiores objetivos. Lembrando que o time_t retoran o valor em segundos, e teremos que realizar a função localtime() para converter esses segundos para converter a data, pois a bilbiotca time referencia os segundos a partir de uma data que acredito ser 1/1/70
+    while (!feof(ata)){
         if (Request.id!=0){//Ciclo Principal do programa
             if (Head==NULL){ //criando para o Head vazio
                 Head->id=Request.id;

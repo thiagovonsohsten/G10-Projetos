@@ -5,6 +5,7 @@
 #include "bibliotecaFready.h"
 
 //O código ártefato é responsável por receber do arduino as presenças dos preceptores e enviar para o SistemaPrincipal
+//Recebe "artefato.txt" e envia "ata.txt"
 
 int main () {
     presenca* head=NULL;
