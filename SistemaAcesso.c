@@ -4,6 +4,8 @@
 #include <time.h>       //Biblioteca do C que contém funções para manipulação de tempo e data, como a função time(), que retorna o número de segundos desde a "época" (1 de janeiro de 1970).
 #include "bibliotecaFready.h"
 
+//vai pegar o "lista_aluno.txt" e o "banco_de_dados.txt" para o usuário navegar no APP
+
 int main (){
     char email,papel;
     //ARBIR ARQUIVO PARA SIMULAR O BANCO DE DADOS
