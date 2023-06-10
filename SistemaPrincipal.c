@@ -1,10 +1,7 @@
-//Central/APP/Sistema/Aplicação que irá receber a mensagem do artefato e irá gerenciar os dados, lembrando que serão acessados pelos residentes, preceptores e gestão do hospital.
-    //Recebe os dados e altera quando reccbe a segunda informação de data
 #include <stdio.h>      //biblioteca padrão
 #include <stdlib.h>     //Fornece funções como alocação de memória dinâmica, conversão de strings, geração de números aleatórios, entre outras
 #include <string.h>     //Fornece funções para manipulação de strings, como copiar, concatenar, comparar e buscar.
 #include <time.h>       //Biblioteca do C que contém funções para manipulação de tempo e data, como a função time(), que retorna o número de segundos desde a "época" (1 de janeiro de 1970).
-#include <windows.h>    //Não precisaria colocar essa biblioteca, contudo é bom destacar que estarei utilizando o sistema operacional do windowns.
 #include "bibliotecaFready.h"
 
 //Responsável por contar as horas de cada estudando
