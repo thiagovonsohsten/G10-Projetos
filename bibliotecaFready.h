@@ -50,12 +50,12 @@ typedef struct {
 //Lista que contem os alunos para simulação do armazenamento do banco de dados
 typedef struct {
     residente aluno;
-    lista_aluno* next;
+    struct lista_aluno* next;
 }lista_aluno;
 
 //Lista que contem os preceptores para simulação do armazenamento do banco de dados
 typedef struct {
     medico preceptor;
-    lista_medico *next;
+    struct lista_medico *next;
 }lista_medico;
 #endif

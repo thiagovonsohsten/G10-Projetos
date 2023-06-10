@@ -18,11 +18,14 @@ int main () {
             fscanf(ata, "%ld\n", &(Head->tempo));
             Head->next=NULL;
         }else{//Vamos primeiro Verificar se o email existe na lista, se não existe crio no último.
-            presenca *verificador=NULL,*anterior=NULL, *cabeca=Head;
+            presenca *verificador=(presenca *)malloc(sizeof(presenca));
+            verificador->next=NULL;
+            presenca *anterior=NULL;
+            presenca *cabeca=Head;
             fscanf(ata, "%s\n", verificador->email);
             fscanf(ata, "%ld\n", &(verificador->tempo));
-            if (strcmp(verificador->email,cabeca->email)!=0){ //condição para passar o primeiro elemento d alista sem bugar.
-                while (strcmp(verificador->email,cabeca->email)!=0 && cabeca->next!=NULL){ //Aqui encontra o email do usuário ou chega no último elemento da lista
+            if ( strcmp(verificador->email,cabeca->email) != 0){ //condição para passar o primeiro elemento d alista sem bugar.
+                while ( strcmp(verificador->email,cabeca->email) !=0 && cabeca->next!=NULL){ //Aqui encontra o email do usuário ou chega no último elemento da lista
                     anterior=cabeca;
                     cabeca=cabeca->next;
                 }
