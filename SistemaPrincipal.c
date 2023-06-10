@@ -5,61 +5,54 @@
 #include <string.h>     //Fornece funções para manipulação de strings, como copiar, concatenar, comparar e buscar.
 #include <time.h>       //Biblioteca do C que contém funções para manipulação de tempo e data, como a função time(), que retorna o número de segundos desde a "época" (1 de janeiro de 1970).
 #include <windows.h>    //Não precisaria colocar essa biblioteca, contudo é bom destacar que estarei utilizando o sistema operacional do windowns.
+#include "bibliotecaFready.h"
 
 //Responsável por contar as horas de cada estudando
-//recebe o arquivo "ata.txt" e envia "presenca.txt"
-
-//struct da mensagem
-struct mensagem {
-    int id;
-    time_t tempo;
-};
-//struct da lista que irá rodar no sistema
-struct ata {
-    int id;
-    time_t tempo;
-    struct ata *next;
-};
-
-struct ata *Head=NULL;
+//recebe o arquivo "ata.txt" e envia "presenca_aluno.txt"
 
 int main () {
-    struct mensagem Request;
-    FILE* ata;
+    presenca *Head=NULL;
+    FILE* ata,* presenca_aluno;
+    ata = fopen("ata.txt", "r");
     while (!feof(ata)){
-        if (Request.id!=0){//Ciclo Principal do programa
-            if (Head==NULL){ //criando para o Head vazio
-                Head->id=Request.id;
-                Head->tempo=Request.tempo;
-                Head->next=(struct ata *)malloc(sizeof(struct ata));
-                Request.id=0; //Condição para sair do if principal
-            }else{//Vamos primeiro Verificar se o id existe na lista, se não existe crio no último.
-                struct ata *contador=Head,*anterior=NULL;
-                if (contador->id!=Request.id){ //condição para passar o primeiro elemento d alista sem bugar.
-                    while (contador->id!=Request.id && contador->next!=NULL){ //Aqui encontra o id do usuário ou chega no último elemento da lista
-                        anterior=contador;
-                        contador=contador->next;
-                    }
+        if (Head==NULL){ //criando para o Head vazio
+            Head=(presenca *)malloc(sizeof(presenca));
+            fscanf(ata, "%s\n", Head->email);
+            fscanf(ata, "%ld\n", &(Head->tempo));
+            Head->next=NULL;
+        }else{//Vamos primeiro Verificar se o email existe na lista, se não existe crio no último.
+            presenca *verificador=NULL,*anterior=NULL, *cabeca=Head;
+            fscanf(ata, "%s\n", verificador->email);
+            fscanf(ata, "%ld\n", &(verificador->tempo));
+            if (strcmp(verificador->email,cabeca->email)!=0){ //condição para passar o primeiro elemento d alista sem bugar.
+                while (strcmp(verificador->email,cabeca->email)!=0 && cabeca->next!=NULL){ //Aqui encontra o email do usuário ou chega no último elemento da lista
+                    anterior=cabeca;
+                    cabeca=cabeca->next;
                 }
-                if (contador->next==NULL && contador->id!=Request.id){ //Após o while, aqui verificamos se ele está no último elemento, e acrescentamos no fim.
-                    contador->next=(struct ata *)malloc(sizeof(struct ata));
-                    contador =contador->next;
-                    contador->id=Request.id;
-                    contador->tempo=Request.tempo;
-                    contador->next=NULL;
-                    Request.id=0; //Condição para sair do if principal
-                }else{ //Aqui identificamos que ele está na lista, pois não é o último. Queremos adicionar ele no banco de dados e eliminar
-                    //*****salvar no arquivo "contador->id/contador->tempo/request.tempo"
-                    if(anterior==NULL){ //Se só houver um item na lista, ele irá limpar a lista
-                        free(contador);
-                    }else{ //Se não, apenas trocará a sequência e limpara o valor
-                        anterior->next=contador->next;
-                        free(contador);
-                        Request.id=0; //Condição para sair do if principal
-                    }
+            }
+            if (cabeca->next==NULL && strcmp(verificador->email,cabeca->email)!=0){ //Após o while, aqui verificamos se ele está no último elemento, e acrescentamos no fim.
+                cabeca->next=(presenca *)malloc(sizeof(presenca));
+                cabeca=cabeca->next;
+                strcpy(cabeca->email,verificador->email);
+                cabeca->tempo=verificador->tempo;
+                cabeca->next=NULL;
+            }else{ //Aqui identificamos que ele está na lista, pois não é o último. Queremos adicionar ele no banco de dados e eliminá-lo
+                presenca_aluno = fopen("presenca.txt", "a");
+                fprintf(presenca_aluno, "%s\n", cabeca->email);
+                fprintf(presenca_aluno, "%ld\n", cabeca->tempo);
+                fprintf(presenca_aluno, "%ld\n", verificador->tempo);
+                fclose(presenca_aluno);
+                if(anterior==NULL){ //Se só houver um item na lista, ele irá limpar a lista
+                    free(verificador);
+                }else{ //Se não, apenas trocará a sequência e limpara o valor
+                    free(verificador);
+                    verificador=cabeca;
+                    anterior->next=cabeca->next;
+                    free(verificador);
                 }
             }
         }
     }
+    fclose(ata);
     return 0;
 }
