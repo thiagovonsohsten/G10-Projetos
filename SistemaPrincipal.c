@@ -22,6 +22,7 @@ struct ata *Head=NULL;
 
 int main () {
     struct mensagem Request;
+    FILE* ata;
     while (1){
     //Recebe os dados do Artefato (para efeito da lógica, iremos considerar uma variávelde struct mensagem)
     Request.id = 20485;
