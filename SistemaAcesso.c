@@ -188,9 +188,8 @@ int main (){
     FILE* senhasBC;
     senhasBC = fopen("senhasBC.txt","r");
     while (!feof(senhasBC)){
-        printf("cirulo do while\n");
+        //printf("cirulo do while\n");
         if (lista_senhas==NULL){
-            printf("Cria a primeira lista!\n");
             lista_senhas=(senhassalvas *)malloc(sizeof(senhassalvas));
             fscanf(senhasBC, "%s\n", lista_senhas->email);
             fscanf(senhasBC, "%s\n", lista_senhas->senha);
@@ -201,7 +200,6 @@ int main (){
             //printf("Senha: %s\n",lista_senhas->senha);
         }else{
             aux = lista_senhas;
-            printf("entrou no else\n");
             while (aux->next!=NULL){
                 // printf("Login: %s\n",aux->email);
                 // printf("Papel: %s\n",aux->papel);
@@ -210,21 +208,26 @@ int main (){
             }
             aux->next=(senhassalvas *)malloc(sizeof(senhassalvas));
             aux=aux->next;
+            fscanf(senhasBC, "%s\n", aux->email);
+            fscanf(senhasBC, "%s\n", aux->senha);
+            fscanf(senhasBC, "%s\n", aux->papel);
             aux->next=NULL;
         }
     }
     fclose(senhasBC);
-
     aux=lista_senhas;
-    while (strcmp(conta,aux->email)!=0 || aux==NULL){
-        printf("passando a lista das senhas...\n");
+    while (strcmp(conta,aux->email)!=0){
+        //printf("passando a lista das senhas...\n");
+        if (aux->next==NULL){
+            break;
+        }
         aux=aux->next;
     }
     if (aux==NULL){
         printf("Login nao existe!\n");
     }else{
-        printf("Senha: %s", senha);
-        printf("Senha: %s", aux->senha);
+        printf("Senha: %s\n", senha);
+        printf("Senha: %s\n", aux->senha);
         if (strcmp(senha,aux->senha)==0){
             printf("Login efetuado, carregando dados...\n");
             // if (strcmp(aux->papel,"lg_residente")==1){
