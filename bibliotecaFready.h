@@ -103,6 +103,7 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
                 printf("E-mail do Preceptor: %s\n", Residente->aluno->email_preceptor);
                 printf("Especialização: %s\n", Residente->aluno->especializacao);
                 printf("ID do Preceptor: %s\n", Residente->aluno->email_preceptor);
+                printf("Histórico de presenças:\n");
                 while(Residente->aluno->lista_de_Presenca->next!=NULL){
                     printf("Entrada: %ld\nSaida: %ld\n",Residente->aluno->lista_de_Presenca->entrada,Residente->aluno->lista_de_Presenca->saida);
                     if (Residente->aluno->lista_de_Presenca->next!=NULL){
@@ -127,10 +128,10 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
                 break;
             case 0:
                 // Sair do menu
-                printf("\nSaindo...\nAté breve! By: Fready!\n");
+                printf("\nSaindo...\nAte breve! By: Fready!\n");
                 break;
             default:
-                printf("\nOpção inválida, tente novamente.\n");
+                printf("\nOpção invalida, tente novamente.\n");
         }
     }
 }

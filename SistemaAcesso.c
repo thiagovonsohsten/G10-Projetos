@@ -229,7 +229,7 @@ int main (){
     }else{
         if (strcmp(senha,aux->senha)==0){
             printf("Login efetuado, carregando dados...\n"); //aux -> senha/email/papel
-            if (strcmp(aux->papel,"residente")==1){
+            if (strcmp(aux->papel,"residente")==0){
                 lg_residente(aux->email, alunos_cadastrados);
             }//else if (strcmp(aux->papel,"preceptor")==1){
             //     lg_medico(aux->email, papel);
