@@ -20,7 +20,7 @@ void lg_residente (char email, char papel) {
     strcpy(Residente->email,"clara@ufpe.br");
     strcpy(Residente->nome,"Jacinto Paulo Muse");
     strcpy(Residente->email_preceptor,"jcpm@ufpe.br");
-    Residente->Head=NULL;
+    //Residente->Head=NULL;
     //Menu com:
         //Dados do Residente
         //Histórico de presença acessado pela lista de struct
@@ -46,15 +46,15 @@ void lg_residente (char email, char papel) {
             case 2:
                 // Exibe o histórico de presença do lg_residente
                 printf("\n--- Histórico de Presença ---\n");
-                historico* temporario = Residente->Head;
-                while (temporario != NULL) {
-                    printf("Entrada: %s", asctime(localtime(&(temporario->entrada))));
-                    printf("Saída: %s", asctime(localtime(&(temporario->saida))));
-                    double diferenca = difftime(temporario->saida, temporario->entrada);
-                    printf("Tempo de Trabalho: %lf segundos\n", diferenca);
-                    printf("\n");
-                    temporario = temporario->next;
-                }
+                //historico* temporario = Residente->Head;
+                // while (temporario != NULL) {
+                //     printf("Entrada: %s", asctime(localtime(&(temporario->entrada))));
+                //     printf("Saída: %s", asctime(localtime(&(temporario->saida))));
+                //     double diferenca = difftime(temporario->saida, temporario->entrada);
+                //     printf("Tempo de Trabalho: %lf segundos\n", diferenca);
+                //     printf("\n");
+                //     temporario = temporario->next;
+                // }
                 break;
             case 0:
                 // Sair do menu
@@ -84,12 +84,12 @@ void lg_medico (char email, char papel) {
             case 1: //Nesse caso, como busquei nos residente a lista de alunos que são supervisionados pelo médico,é apenas processo de impressão
                 printf("\nLista de alunos sob sua supervisão:\n");
                 lista_aluno *aluno_atual = alunos;
-                while (aluno_atual != NULL) {
-                    if (strcmp(aluno_atual->aluno.email_preceptor,email)==1){
-                        printf("ID: %d\nNome: %s\n", aluno_atual->aluno.email, aluno_atual->aluno.nome);
-                    }
-                    aluno_atual = aluno_atual->next;
-                }
+                // while (aluno_atual != NULL) {
+                //     if (strcmp(aluno_atual->aluno.email_preceptor,email)==1){
+                //         printf("ID: %d\nNome: %s\n", aluno_atual->aluno.email, aluno_atual->aluno.nome);
+                //     }
+                //     aluno_atual = aluno_atual->next;
+                // }
                 break;
             case 2: //Escolhe o ID do aluno através da função 'encontrar_aluno_por_email() e retorna um struct residente com a estrutura do aluno.
                 printf("\nDigite o ID do aluno para visualizar a frequência: ");
@@ -102,11 +102,11 @@ void lg_medico (char email, char papel) {
                     break;
                 }
                 printf("\nFrequência de %s:\n", ponteiro->nome); //Mostra o nome do aluno e abaixo segue o histórico pela função while.
-                historico *presenca_atual = ponteiro->Head;// No While ele irá rodar todas as presenças que o aluno tem.
-                while (presenca_atual != NULL) {
-                    printf("Entrada: %sSaida: %sDuração: %ld segundos\n", ctime(&(presenca_atual->entrada)), ctime(&(presenca_atual->saida)), presenca_atual->saida - presenca_atual->entrada);
-                    presenca_atual = presenca_atual->next;
-                }
+                // historico *presenca_atual = ponteiro->Head;// No While ele irá rodar todas as presenças que o aluno tem.
+                // while (presenca_atual != NULL) {
+                //     printf("Entrada: %sSaida: %sDuração: %ld segundos\n", ctime(&(presenca_atual->entrada)), ctime(&(presenca_atual->saida)), presenca_atual->saida - presenca_atual->entrada);
+                //     presenca_atual = presenca_atual->next;
+                // }
                 break;
             case 0:
                 printf("\nSaindo do Menu do Médico.\n");
