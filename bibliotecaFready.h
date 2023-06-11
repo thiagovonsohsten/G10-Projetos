@@ -82,14 +82,14 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
 
     int paginaPrincipal = 1;
     char senha_antiga[100],senha_nova[100],senha_Verificador[100];
-    int opcao,menu_navbar;
+    int opcao,menu_navbar,sair_app;
     while (paginaPrincipal !=0){
         printf("-- Pagina Principal --");
         printf("\n\n");
         //Printar tempo corrido @@G10@@
         printf("Tempo decorrido:\n");
         printf("\n\n");
-        printf("Acessar NavBar - 1 (Pagina Principal/Calendario/Menu)");
+        printf("Acessar NavBar - (1 -Pagina Principal/2 - Calendario/3 - Menu)");
         scanf("%d", &opcao);
         switch(opcao) {
             case 1:
@@ -131,7 +131,7 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
                 }else if (menu_navbar==2) {
                     printf("\n--- Trocar Senha ---\n");  
                     printf("Digite a Senha Antiga:");
-                    fgets(senha_antiga,sizeof(senha_antiga),stdin);
+                    fgets(senha_antiga,sizeof(senha_antiga),stdin); //Nao espera! ERRO!
                     //condiçao se é verdadeira @@G10@@
                     printf("Digite a Senha Nova:");
                     fgets(senha_nova,sizeof(senha_nova),stdin);
@@ -145,10 +145,18 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
                         getchar();
                         getchar();
                     }
+                }else {
+                    printf("Fechando App...\n");
+                    printf("Deseja realmente Sair?\n(1)-Sim\t(2)-Não\n");
+                    scanf("%d", &sair_app);
+                    if (sair_app==1){
+                        paginaPrincipal=0;
+                    }
+                    //vai pro menu
                 }
                 break;
             default:
-                printf("\nOpção invalida, tente novamente.\n");
+                printf("\nOpcao invalida, tente novamente.\n");
         }
     }
 }
