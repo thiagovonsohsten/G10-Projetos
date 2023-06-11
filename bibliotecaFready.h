@@ -161,7 +161,9 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
     }
 }
 
-void lg_medico(char email, char papel);
+void lg_medico(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_medicos){
+
+}
 
 void lg_adm(char email, char papel);
 
