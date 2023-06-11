@@ -226,8 +226,6 @@ int main (){
     if (aux==NULL){
         printf("Login nao existe!\n");
     }else{
-        printf("Senha: %s\n", senha);
-        printf("Senha: %s\n", aux->senha);
         if (strcmp(senha,aux->senha)==0){
             printf("Login efetuado, carregando dados...\n");
             // if (strcmp(aux->papel,"lg_residente")==1){
