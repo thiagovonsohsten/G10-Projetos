@@ -67,8 +67,6 @@ typedef struct lista_adm {
     struct lista_adm *next;
 }lista_adm;
 
-residente encontrar_aluno_por_email(char email);
-
 void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
     //busca nos arquivos o email e nível
     lista_aluno* Residente=lista_de_alunos;
@@ -172,7 +170,7 @@ void lg_medico(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_
         printf("Erro ao localizar usuario!\n");
         return;
     }
-
+    //Menu principal
     int paginaprincipal=1;
     int menu_navbar;
     int sair_app;
@@ -269,6 +267,41 @@ void lg_medico(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_
 
 }
 
-void lg_adm(char email, char papel);
+void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_medicos, lista_adm* lista_de_adm){
+//busca nos arquivos o email e nível
+    lista_adm* Adm=lista_de_adm; //Lista de médicos cadastrados
+    lista_aluno* auxAlunos; //Lista que salvará todos os alunos
+    lista_medico* auxMedicos; //Lista que salvará todos os preceptores
+    while (strcmp(Adm->administrador->email,email)!=0 || Adm==NULL){
+        Adm=Adm->next;
+    }
+    if (Adm==NULL){
+        printf("Erro ao localizar usuario!\n");
+        return;
+    }
+//Menu Principal
+    int paginaprincipal=1;
+    int menu_navbar;
+    int sair_app;
+    char senha_antiga[100],senha_nova[100],senha_verificador[100];
+    while(paginaprincipal!=0){
+        int subpagina=0;
+        while (subpagina!=1 && subpagina!=2){
+        printf("--- Pagina Principal ---");
+        printf("\n\nO que deseja fazer?\n(1)-Acrescentar Novo Membro\t(2)-Acessar conta de um membro\t(3)Estatística\n");
+        scanf("%d",&subpagina);
+            if(subpagina==1){
+                //Adicionaro no arquivo "senhasBC.txt" e no "banco_de_dados.txt" e opções de pesquisa @@G10@@ 
+            }else if (subpagina==2){
+                //listas - lista_de_alunos e lista_de_medicos
+            }else if (subpagina==3){
+                //mostrar dados estatísticos
+            }else{
+                printf("Valor invaido!\n");
+            }
+
+        }
+    }
+}
 
 #endif

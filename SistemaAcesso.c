@@ -234,7 +234,7 @@ int main (){
             }else if (strcmp(aux->papel,"preceptor")==1){
                  lg_medico(aux->email,alunos_cadastrados,medicos_cadastrados);
             }else if (strcmp(aux->papel,"lg_adm")==1){
-            //     lg_adm(aux->email, papel);
+                lg_adm(aux->email,alunos_cadastrados,medicos_cadastrados,adms_cadastrados);
         }else {
             printf("Senha Incorreta!\n");
         }
