@@ -4,7 +4,13 @@
 #include <time.h>       //Biblioteca do C que contém funções para manipulação de tempo e data, como a função time(), que retorna o número de segundos desde a "época" (1 de janeiro de 1970).
 #include "bibliotecaFready.h"
 
-//vai pegar o "lista_aluno.txt" e o "banco_de_dados.txt" para o usuário navegar no APP
+//vai pegar o "login.txt" e comparar com "senhasBC.txt" e usar o "banco_de_dados.txt" para buscar os dados do usuário no APP
+typedef struct senhassalvas {
+    char email[100];
+    char senha[100];
+    char papel [10];
+    struct senhassalvas* next;
+}senhassalvas;
 
 int main (){
     //ABRIR ARQUIVO PARA SIMULAR O BANCO DE DADOS
@@ -105,7 +111,7 @@ int main (){
                 //printf("Entrou no else\n");
                 auxM=medicos_cadastrados;
                 while(auxM->next!=NULL){
-                    printf("while\n");
+                    //printf("while\n");
                     auxM=auxM->next;
                 }
                 auxM->next=(lista_medico* )malloc(sizeof(lista_medico));
@@ -152,7 +158,7 @@ int main (){
         }
     }
     fclose(banco_de_dados);
-        // printf("Saiu do while\n");
+//printf("Saiu do while\n");
     // auxLA=alunos_cadastrados;
     // while (auxLA!=NULL){
     //     printf("Nome:%s\nPapel:%s\nCPF:%s\nE-mail:%s\nE-mail do Preceptor:%s\nEspecialidade:%s\n",auxLA->aluno->nome,auxLA->aluno->papel,auxLA->aluno->cpf,auxLA->aluno->email,auxLA->aluno->email_preceptor,auxLA->aluno->especializacao);
@@ -168,17 +174,69 @@ int main (){
     // }
     
     //Com o Banco de Dados no sistema, segue o código.
+    senhassalvas* lista_senhas = NULL;
+    senhassalvas* aux = NULL;
+    char conta[100];
+    char senha[100];
+    FILE* login;
+    login = fopen("login.txt", "r");
+    fscanf(login, "%s\n", conta);
+    //printf("Login:%s\n",conta);
+    fscanf(login, "%s\n", senha);
+    //printf("Senha:%s\n",senha);
+    fclose(login);
+    FILE* senhasBC;
+    senhasBC = fopen("senhasBC.txt","r");
+    while (!feof(senhasBC)){
+        printf("cirulo do while\n");
+        if (lista_senhas==NULL){
+            printf("Cria a primeira lista!\n");
+            lista_senhas=(senhassalvas *)malloc(sizeof(senhassalvas));
+            fscanf(senhasBC, "%s\n", lista_senhas->email);
+            fscanf(senhasBC, "%s\n", lista_senhas->senha);
+            fscanf(senhasBC, "%s\n", lista_senhas->papel);
+            lista_senhas->next=NULL;
+            //printf("Login: %s\n",lista_senhas->email);
+            //printf("Papel: %s\n",lista_senhas->papel);
+            //printf("Senha: %s\n",lista_senhas->senha);
+        }else{
+            aux = lista_senhas;
+            printf("entrou no else\n");
+            while (aux->next!=NULL){
+                // printf("Login: %s\n",aux->email);
+                // printf("Papel: %s\n",aux->papel);
+                // printf("Senha: %s\n",aux->senha);
+                aux=aux->next;
+            }
+            aux->next=(senhassalvas *)malloc(sizeof(senhassalvas));
+            aux=aux->next;
+            aux->next=NULL;
+        }
+    }
+    fclose(senhasBC);
 
-    // char email,papel;
-    // if (strcmp(papel,"lg_residente")==1){
-    //     lg_residente(email, papel);
-    // }else if (strcmp(papel,"preceptor")==1){
-    //     lg_medico(email, papel);
-    // }else if (strcmp(papel,"lg_adm")==1){
-    //     lg_adm(email, papel);
-    // }else{
-    //     printf("Nível ou código Incorretos!");
-    // }
+    aux=lista_senhas;
+    while (strcmp(conta,aux->email)!=0 || aux==NULL){
+        printf("passando a lista das senhas...\n");
+        aux=aux->next;
+    }
+    if (aux==NULL){
+        printf("Login nao existe!\n");
+    }else{
+        printf("Senha: %s", senha);
+        printf("Senha: %s", aux->senha);
+        if (strcmp(senha,aux->senha)==0){
+            printf("Login efetuado, carregando dados...\n");
+            // if (strcmp(aux->papel,"lg_residente")==1){
+            //     lg_residente(aux->email, papel);
+            // }else if (strcmp(aux->papel,"preceptor")==1){
+            //     lg_medico(aux->email, papel);
+            // }else if (strcmp(aux->papel,"lg_adm")==1){
+            //     lg_adm(aux->email, papel);
+        }else {
+            printf("Senha Incorreta!\n");
+        }
+    }
     return 0;
 }
 

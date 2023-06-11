@@ -5,7 +5,7 @@
 #include "bibliotecaFready.h"
 
 //Responsável por contar as horas de cada estudando
-//recebe o arquivo "ata.txt" e envia "presenca_aluno.txt"
+//recebe o arquivo "ata.txt" e envia "presenca_aluno.txt para o banco de dados"
 
 int main () {
     presenca *Head=NULL;
