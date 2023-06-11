@@ -1,70 +1,10 @@
-#include "bibliotecaFready.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "bibliotecaFready.h"
 
 //funções do APP
 
-residente encontrar_aluno_por_email(char email){
-    //aqui o sistema irá realizar uma busca e retornar os residente do aluno
-    residente aluno;
-    //iguala os residente a struct aluno e a retorna.
-    return (aluno);
-}
-
-void lg_residente (char email, char papel) {
-    //busca nos arquivos o email e nível
-    residente* Residente;
-    //A título de desenvolvimento irei acrescentar os residente manualmente, mas deverá ser recolhido pelo banco de residente em uma busca pelo email e papel
-    strcpy(Residente->cpf,"000.000.000-02");
-    strcpy(Residente->email,"clara@ufpe.br");
-    strcpy(Residente->nome,"Jacinto Paulo Muse");
-    strcpy(Residente->email_preceptor,"jcpm@ufpe.br");
-    //Residente->Head=NULL;
-    //Menu com:
-        //Dados do Residente
-        //Histórico de presença acessado pela lista de struct
-        // Menu do lg_residente
-    int opcao = -1;
-    while (opcao != 0) {
-        printf("\n--- Menu do Residente ---\n");
-        printf("1. Visualizar seus residente\n");
-        printf("2. Visualizar histórico de presença\n");
-        printf("0. Sair\n");
-        printf("Digite a opção desejada: ");
-        scanf("%d", &opcao);
-
-        switch(opcao) {
-            case 1:
-                // Exibe os residente do lg_residente
-                printf("\n--- Dados do Residente ---\n");
-                printf("Nome: %s\n", Residente->nome);
-                printf("CPF: %s\n", Residente->cpf);
-                printf("ID: %d\n", Residente->email);
-                printf("ID do Preceptor: %d\n", Residente->email_preceptor);
-                break;
-            case 2:
-                // Exibe o histórico de presença do lg_residente
-                printf("\n--- Histórico de Presença ---\n");
-                //historico* temporario = Residente->Head;
-                // while (temporario != NULL) {
-                //     printf("Entrada: %s", asctime(localtime(&(temporario->entrada))));
-                //     printf("Saída: %s", asctime(localtime(&(temporario->saida))));
-                //     double diferenca = difftime(temporario->saida, temporario->entrada);
-                //     printf("Tempo de Trabalho: %lf segundos\n", diferenca);
-                //     printf("\n");
-                //     temporario = temporario->next;
-                // }
-                break;
-            case 0:
-                // Sair do menu
-                printf("\nSaindo...\n");
-                break;
-            default:
-                printf("\nOpção inválida, tente novamente.\n");
-        }
-    }
-}
 
 void lg_medico (char email, char papel) {
     // Busca nos arquivos o email e nível do médico
@@ -163,3 +103,9 @@ void lg_adm (char email, char papel) {
     }
 }
 
+residente encontrar_aluno_por_email(char email){
+    //aqui o sistema irá realizar uma busca e retornar os residente do aluno
+    residente aluno;
+    //iguala os residente a struct aluno e a retorna.
+    return (aluno);
+}

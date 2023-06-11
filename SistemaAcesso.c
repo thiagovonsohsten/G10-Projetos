@@ -13,7 +13,7 @@ typedef struct senhassalvas {
 }senhassalvas;
 
 int main (){
-    //ABRIR ARQUIVO PARA SIMULAR O BANCO DE DADOS
+//ABRIR ARQUIVO PARA SIMULAR O BANCO DE DADOS
     char comp_email[100];
     char referencia_usuario[11];
     //estruturas de auxilio
@@ -158,7 +158,7 @@ int main (){
         }
     }
     fclose(banco_de_dados);
-//printf("Saiu do while\n");
+    //printf("Saiu do while\n");
     // auxLA=alunos_cadastrados;
     // while (auxLA!=NULL){
     //     printf("Nome:%s\nPapel:%s\nCPF:%s\nE-mail:%s\nE-mail do Preceptor:%s\nEspecialidade:%s\n",auxLA->aluno->nome,auxLA->aluno->papel,auxLA->aluno->cpf,auxLA->aluno->email,auxLA->aluno->email_preceptor,auxLA->aluno->especializacao);
@@ -173,7 +173,8 @@ int main (){
     //     auxLA=auxLA->next;
     // }
     
-    //Com o Banco de Dados no sistema, segue o código.
+//Com o Banco de Dados no sistema, segue o código.
+
     senhassalvas* lista_senhas = NULL;
     senhassalvas* aux = NULL;
     char conta[100];
@@ -227,10 +228,10 @@ int main (){
         printf("Login nao existe!\n");
     }else{
         if (strcmp(senha,aux->senha)==0){
-            printf("Login efetuado, carregando dados...\n");
-            // if (strcmp(aux->papel,"lg_residente")==1){
-            //     lg_residente(aux->email, papel);
-            // }else if (strcmp(aux->papel,"preceptor")==1){
+            printf("Login efetuado, carregando dados...\n"); //aux -> senha/email/papel
+            if (strcmp(aux->papel,"residente")==1){
+                lg_residente(aux->email, alunos_cadastrados);
+            }//else if (strcmp(aux->papel,"preceptor")==1){
             //     lg_medico(aux->email, papel);
             // }else if (strcmp(aux->papel,"lg_adm")==1){
             //     lg_adm(aux->email, papel);
