@@ -1,0 +1,58 @@
+fera@ufpe.br
+residente
+Furilunco Francisco Fernandes
+000.000.000-00
+profnota10@ufpe.br
+cardiologista
+1622544001,1622544020,1622544300,1622542000,
+profnota10@ufpe.br
+preceptor
+Pamela Paola Bracho
+000.000.000-01
+CRM/PE123456
+cardiologista
+mestre@ufpe.br
+residente
+Mario Morales Meirele
+000.000.000-03
+profnota10@ufpe.br
+cardiologista
+1622544000,1622544021,1622544301,1622542001,
+ihcnaveia@ufpe.br
+preceptor
+Gabriele Gante Gomes
+000.000.000-04
+CRM/PE234567
+pneumologista
+gm@ufpe.br
+preceptor
+Geovan Gustavo Guga
+000.000.000-05
+CRM/PE345678
+dermatologia
+furia@ufpe.br
+residente
+Fulano Finco Franco
+000.000.000-06
+gm@ufpe.br
+dermatologia
+1622544201,1622544220,1622544300,1622542330,1622545000,1622545002,
+semsiga@ufpe.br
+adm
+Carlos Cleiton Cunha
+000.000.000-07
+sigabem@ufpe.br
+adm
+Mandulin Marcuino Mauricio
+000.000.000-08
+beijaflor@ufpe.br
+adm
+Paulo Pernandico Petrucio
+000.000.000-09
+cabuloso@ufpe.br
+residente
+Caio Candido Carneiro
+000.000.000-10
+profnota10@ufpe.br
+cardiologista
+1622544101,1622544120,1622544320,1622544350,1622545000,1622545020,1622546100,1622546150,
