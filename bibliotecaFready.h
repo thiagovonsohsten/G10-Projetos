@@ -106,7 +106,7 @@ void trocar_senha(char email[20]){
     }
 }
 
-int verificadordesenhas(char login[20],char senha [20]){
+int verificadordesenhas(char login[20],char senha [20]){ //ele abre o arquivo "senhasBC.txt"
     senhassalvas* lista_senhas = NULL;
     senhassalvas* aux = NULL;
     //importar as senhas para uma lista
@@ -145,7 +145,7 @@ int verificadordesenhas(char login[20],char senha [20]){
     while (strcmp(login,aux->email)!=0){
         //printf("passando a lista das senhas...\n");
         if (aux->next==NULL){
-            return 4;
+            return 4; //Login errada
         }
         aux=aux->next;
     }
@@ -158,7 +158,7 @@ int verificadordesenhas(char login[20],char senha [20]){
             return 3;
         }
     }else {
-        return 0;
+        return 0; //Senha errado
     }
 }
 
@@ -374,8 +374,9 @@ void lg_medico(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_
 void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_medicos, lista_adm* lista_de_adm){
 //busca nos arquivos o email e nível
     lista_adm* Adm=lista_de_adm; //Lista de médicos cadastrados
-    //lista_aluno* auxAlunos; //Lista que salvará todos os alunos
-    //lista_medico* auxMedicos; //Lista que salvará todos os preceptores
+    lista_aluno* auxAlunos=lista_de_alunos; //Lista que salvará todos os alunos
+    lista_medico* auxMedicos=lista_de_medicos; //Lista que salvará todos os preceptores
+    //buscar os dados do adm
     while (strcmp(Adm->administrador->email,email)!=0 || Adm==NULL){
         Adm=Adm->next;
     }
@@ -383,6 +384,7 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
         printf("Erro ao localizar usuario!\n");
         return;
     }
+
 //Menu Principal
     int paginaprincipal=1;
     //int menu_navbar;

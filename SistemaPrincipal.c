@@ -5,7 +5,7 @@
 #include "bibliotecaFready.h"
 
 //Responsável por contar as horas de cada estudando
-//recebe o arquivo "ata.txt", salva um arquivo "presentes.txt" para todos os presentes e gera um arquivo "presentes.txt" para dar baixa nas presencas.
+//recebe o arquivo "ata.txt", salva um arquivo "presentes.txt" para todos os presentes e gera um arquivo "presenca.txt" para dar baixa nas presencas.
 
 void enviarpresentes(presentes* cabeca);
 void baixapresentes(char email[20], time_t entrada,time_t saida);
