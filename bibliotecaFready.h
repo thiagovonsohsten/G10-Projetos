@@ -84,6 +84,8 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
     while (paginaPrincipal !=0){
         printf("-- Pagina Principal --");
         printf("\n\n");
+        //FILE* tempo;
+        //tempo=fopen("ata.txt","r");
         //Printar tempo corrido @@G10@@
         printf("Tempo decorrido:\n");
         printf("\n\n");
@@ -270,8 +272,8 @@ void lg_medico(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_
 void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_medicos, lista_adm* lista_de_adm){
 //busca nos arquivos o email e nível
     lista_adm* Adm=lista_de_adm; //Lista de médicos cadastrados
-    lista_aluno* auxAlunos; //Lista que salvará todos os alunos
-    lista_medico* auxMedicos; //Lista que salvará todos os preceptores
+    //lista_aluno* auxAlunos; //Lista que salvará todos os alunos
+    //lista_medico* auxMedicos; //Lista que salvará todos os preceptores
     while (strcmp(Adm->administrador->email,email)!=0 || Adm==NULL){
         Adm=Adm->next;
     }
@@ -281,9 +283,9 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
     }
 //Menu Principal
     int paginaprincipal=1;
-    int menu_navbar;
-    int sair_app;
-    char senha_antiga[100],senha_nova[100],senha_verificador[100];
+    //int menu_navbar;
+    //int sair_app;
+    //char senha_antiga[100],senha_nova[100],senha_verificador[100];
     while(paginaprincipal!=0){
         int subpagina=0;
         while (subpagina!=1 && subpagina!=2){
