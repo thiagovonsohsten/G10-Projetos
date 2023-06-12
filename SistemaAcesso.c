@@ -231,9 +231,9 @@ int main (){
             printf("Login efetuado, carregando dados...\n"); //aux -> senha/email/papel
             if (strcmp(aux->papel,"residente")==0){
                 lg_residente(aux->email, alunos_cadastrados);
-            }else if (strcmp(aux->papel,"preceptor")==1){
+            }else if (strcmp(aux->papel,"preceptor")==0){
                  lg_medico(aux->email,alunos_cadastrados,medicos_cadastrados);
-            }else if (strcmp(aux->papel,"lg_adm")==1){
+            }else if (strcmp(aux->papel,"lg_adm")==0){
                 lg_adm(aux->email,alunos_cadastrados,medicos_cadastrados,adms_cadastrados);
         }else {
             printf("Senha Incorreta!\n");
