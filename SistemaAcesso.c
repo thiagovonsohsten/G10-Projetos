@@ -13,7 +13,7 @@ typedef struct senhassalvas {
 }senhassalvas;
 
 int main (){
-    //ABRIR ARQUIVO PARA SIMULAR O BANCO DE DADOS
+//ABRIR ARQUIVO PARA SIMULAR O BANCO DE DADOS
     char comp_email[100];
     char referencia_usuario[11];
     //estruturas de auxilio
@@ -158,7 +158,7 @@ int main (){
         }
     }
     fclose(banco_de_dados);
-//printf("Saiu do while\n");
+    //printf("Saiu do while\n");
     // auxLA=alunos_cadastrados;
     // while (auxLA!=NULL){
     //     printf("Nome:%s\nPapel:%s\nCPF:%s\nE-mail:%s\nE-mail do Preceptor:%s\nEspecialidade:%s\n",auxLA->aluno->nome,auxLA->aluno->papel,auxLA->aluno->cpf,auxLA->aluno->email,auxLA->aluno->email_preceptor,auxLA->aluno->especializacao);
@@ -173,7 +173,8 @@ int main (){
     //     auxLA=auxLA->next;
     // }
     
-    //Com o Banco de Dados no sistema, segue o código.
+//Com o Banco de Dados no sistema, segue o código.
+
     senhassalvas* lista_senhas = NULL;
     senhassalvas* aux = NULL;
     char conta[100];
@@ -188,9 +189,8 @@ int main (){
     FILE* senhasBC;
     senhasBC = fopen("senhasBC.txt","r");
     while (!feof(senhasBC)){
-        printf("cirulo do while\n");
+        //printf("cirulo do while\n");
         if (lista_senhas==NULL){
-            printf("Cria a primeira lista!\n");
             lista_senhas=(senhassalvas *)malloc(sizeof(senhassalvas));
             fscanf(senhasBC, "%s\n", lista_senhas->email);
             fscanf(senhasBC, "%s\n", lista_senhas->senha);
@@ -201,7 +201,6 @@ int main (){
             //printf("Senha: %s\n",lista_senhas->senha);
         }else{
             aux = lista_senhas;
-            printf("entrou no else\n");
             while (aux->next!=NULL){
                 // printf("Login: %s\n",aux->email);
                 // printf("Papel: %s\n",aux->papel);
@@ -210,32 +209,36 @@ int main (){
             }
             aux->next=(senhassalvas *)malloc(sizeof(senhassalvas));
             aux=aux->next;
+            fscanf(senhasBC, "%s\n", aux->email);
+            fscanf(senhasBC, "%s\n", aux->senha);
+            fscanf(senhasBC, "%s\n", aux->papel);
             aux->next=NULL;
         }
     }
     fclose(senhasBC);
-
     aux=lista_senhas;
-    while (strcmp(conta,aux->email)!=0 || aux==NULL){
-        printf("passando a lista das senhas...\n");
+    while (strcmp(conta,aux->email)!=0){
+        //printf("passando a lista das senhas...\n");
+        if (aux->next==NULL){
+            break;
+        }
         aux=aux->next;
     }
     if (aux==NULL){
         printf("Login nao existe!\n");
     }else{
-        printf("Senha: %s", senha);
-        printf("Senha: %s", aux->senha);
         if (strcmp(senha,aux->senha)==0){
-            printf("Login efetuado, carregando dados...\n");
-            // if (strcmp(aux->papel,"lg_residente")==1){
-            //     lg_residente(aux->email, papel);
-            // }else if (strcmp(aux->papel,"preceptor")==1){
-            //     lg_medico(aux->email, papel);
-            // }else if (strcmp(aux->papel,"lg_adm")==1){
-            //     lg_adm(aux->email, papel);
+            printf("Login efetuado, carregando dados...\n"); //aux -> senha/email/papel
+            if (strcmp(aux->papel,"residente")==0){
+                lg_residente(aux->email, alunos_cadastrados);
+            }else if (strcmp(aux->papel,"preceptor")==1){
+                 lg_medico(aux->email,alunos_cadastrados,medicos_cadastrados);
+            }else if (strcmp(aux->papel,"lg_adm")==1){
+                lg_adm(aux->email,alunos_cadastrados,medicos_cadastrados,adms_cadastrados);
         }else {
             printf("Senha Incorreta!\n");
         }
+    }
     }
     return 0;
 }
