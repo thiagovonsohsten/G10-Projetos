@@ -7,7 +7,7 @@ cardiologista
 1622544001,1622544020,1622544300,1622542000,
 profnota10@ufpe.br
 preceptor
-Pamela Paola Bracho
+Pamela Thays Lins Bezerra
 000.000.000-01
 CRM/PE123456
 cardiologista
