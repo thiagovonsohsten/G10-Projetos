@@ -5,26 +5,26 @@
 #include "bibliotecaFready.h"
 
 //Responsável por contar as horas de cada estudando
-//recebe o arquivo "ata.txt", salva um arquivo "presentes.txt" para todos os presentes e gera um arquivo "presenca.txt" para dar baixa nas presencas.
+//recebe o arquivo "ata.txt", salva um arquivo "presentes.txt" para todos os presentes e gera um arquivo "presentes.txt" para dar baixa nas presencas.
 
-void enviarpresentes(presenca* cabeca);
+void enviarpresentes(presentes* cabeca);
 void baixapresentes(char email[20], time_t entrada,time_t saida);
 
 int main () {
-    presenca *Head=NULL;
+    presentes *Head=NULL;
     FILE* ata;
     ata = fopen("ata.txt", "r");
     while (!feof(ata)){
         if (Head==NULL){ //criando para o Head vazio
-            Head=(presenca *)malloc(sizeof(presenca));
+            Head=(presentes *)malloc(sizeof(presentes));
             fscanf(ata, "%s\n", Head->email);
             fscanf(ata, "%ld\n", &(Head->tempo));
             Head->next=NULL;
         }else{//Vamos primeiro Verificar se o email existe na lista, se não existe crio no último.
-            presenca *verificador=(presenca *)malloc(sizeof(presenca));
+            presentes *verificador=(presentes *)malloc(sizeof(presentes));
             verificador->next=NULL;
-            presenca *anterior=NULL;
-            presenca *cabeca=Head;
+            presentes *anterior=NULL;
+            presentes *cabeca=Head;
             fscanf(ata, "%s\n", verificador->email);
             fscanf(ata, "%ld\n", &(verificador->tempo));
             //condição para passar o primeiro elemento d alista sem bugar.
@@ -36,7 +36,7 @@ int main () {
             }
             //condição para econtrar dentro da lista de presentes
             if (cabeca->next==NULL && strcmp(verificador->email,cabeca->email)!=0){ //Após o while, aqui verificamos se ele está no último elemento, e acrescentamos no fim.
-                cabeca->next=(presenca *)malloc(sizeof(presenca));
+                cabeca->next=(presentes *)malloc(sizeof(presentes));
                 cabeca=cabeca->next;
                 strcpy(cabeca->email,verificador->email);
                 cabeca->tempo=verificador->tempo;
@@ -66,8 +66,8 @@ int main () {
     return 0;
 }
 
-void enviarpresentes(presenca* cabeca){
-    presenca* aux=cabeca;
+void enviarpresentes(presentes* cabeca){
+    presentes* aux=cabeca;
     FILE* presente;
     presente = fopen("presentes.txt","w");
     while(aux!=NULL){
@@ -79,10 +79,9 @@ void enviarpresentes(presenca* cabeca){
 }
 
 void baixapresentes(char email[20], time_t entrada,time_t saida){
-    FILE* presenca; //lista que define a conclusão do turno de trabalho
-    presenca=fopen("presenca.txt","w");
-    fprintf(presenca, "%s\n", email);
-    fprintf(presenca, "%ld\n", entrada);
-    fprintf(presenca, "%ld\n", saida);
-    fclose(presenca);
+    FILE* presentes; //lista que define a conclusão do turno de trabalho
+    presentes=fopen("presentes.txt","w");
+    fprintf(presentes, "%s\n", email);
+    fprintf(presentes, "%ld\n", entrada);
+    fclose(presentes);
 }

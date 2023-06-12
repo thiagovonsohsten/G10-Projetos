@@ -6,11 +6,18 @@
 #include <time.h>
 
 //Lista de presença
-typedef struct presenca{
+typedef struct presentes{
     char email[20];
     time_t tempo;
-    struct presenca *next;
-}presenca;
+    struct presentes *next;
+}presentes;
+
+typedef struct precensa{
+    char email[20];
+    time_t entrada;
+    time_t saida;
+    struct precensa *next;
+}precensa;
 
 //lista para o histórico de cada preceptor
 typedef struct historico{
@@ -70,6 +77,8 @@ typedef struct lista_adm {
 void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
     //busca nos arquivos o email e nível
     lista_aluno* Residente=lista_de_alunos;
+    presentes* lista_presentes=(presentes *)malloc(sizeof(presentes));
+    lista_presentes->next=NULL;
     while (strcmp(Residente->aluno->email,email)!=0 || Residente==NULL){
         Residente=Residente->next;
     }
@@ -84,12 +93,31 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
     while (paginaPrincipal !=0){
         printf("-- Pagina Principal --");
         printf("\n\n");
-        //FILE* tempo;
-        //tempo=fopen("ata.txt","r");
+        presentes* aux=lista_presentes;
+        FILE* tempo;
+        tempo=fopen("presentes.txt","r");
+        while (!feof(tempo)){
+            fscanf(tempo,"%s\n",aux->email);
+            fscanf(tempo,"%ld\n",(&aux->tempo));
+            if (!feof(tempo)){
+                aux->next=(presentes *)malloc(sizeof(presentes));
+                aux=aux->next;
+                aux->next=NULL;
+            }
+        }
+        fclose(tempo);
         //Printar tempo corrido @@G10@@
-        printf("Tempo decorrido:\n");
-        printf("\n\n");
-        printf("Acessar NavBar - (1 -Pagina Principal/2 - Calendario/3 - Menu)");
+        aux=lista_presentes;
+        while(strcmp(aux->email,email)!=0 || aux==NULL){
+            aux=aux->next;
+        }
+        if(aux==NULL){
+            printf("-- Você não esta presente :( --\n");
+        }else {
+            printf("--Voce entrou em: --\n");
+            printf("--%ld       \n",aux->tempo); // depois converter em hora
+        }
+        printf("Para acessar a NavBar, digite: ( 1) -Pagina Principal/2) - Calendario/3) - Menu)");
         scanf("%d", &opcao);
         switch(opcao) {
             case 1:
@@ -107,7 +135,7 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
                     }
                     n++;
                 }
-                printf("Aperter qualquer tecla para ir ao menu!");
+                printf("Aperter qualquer tecla para ir a Pagina Principal!");
                 getchar();
                 getchar();
                 break;
@@ -125,25 +153,28 @@ void lg_residente (char email[20], lista_aluno* lista_de_alunos) {
                     printf("E-mail: %s\n", Residente->aluno->email);
                     printf("E-mail do Preceptor: %s\n", Residente->aluno->email_preceptor);
                     printf("Especializacao: %s\n", Residente->aluno->especializacao);
-                    printf("Aperter qualquer tecla para ir ao menu!");
+                    printf("Aperter qualquer tecla para ir a Pagina Principal!");
                     getchar();
                     getchar();
                 }else if (menu_navbar==2) {
                     printf("\n--- Trocar Senha ---\n");  
                     printf("Digite a Senha Antiga:");
-                    fgets(senha_antiga,sizeof(senha_antiga),stdin); //Nao espera! ERRO!
-                    //condiçao se é verdadeira @@G10@@
+                    getchar();
+                    fgets(senha_antiga,sizeof(senha_antiga),stdin);
                     printf("Digite a Senha Nova:");
+                    getchar();
                     fgets(senha_nova,sizeof(senha_nova),stdin);
                     printf("Repita a senha Nova:");
+                    getchar();
                     fgets(senha_Verificador,sizeof(senha_Verificador),stdin);
-                    //condição se as senhas novas batem
                     if (strcmp(senha_nova,senha_Verificador)==0){
-                        //trocar senha no senhasBC.txt @@G10@@
+                        //IMPLEMENTAR: trocar senha no senhasBC.txt @@G10@@
                         printf("Senha Trocada com Sucesso!\n");
-                        printf("Aperter qualquer tecla para ir ao menu!");
+                        printf("Aperter qualquer tecla para ir a Pagina Principal!");
                         getchar();
                         getchar();
+                    }else {
+                        printf("Senhas Incorretas!\n");
                     }
                 }else {
                     printf("Fechando App...\n");

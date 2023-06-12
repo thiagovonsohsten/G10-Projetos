@@ -8,8 +8,8 @@
 //Recebe "artefato.txt" e envia "ata.txt"
 
 int main () {
-    presenca* head=NULL;
-    presenca* lista=NULL;
+    presentes* head=NULL;
+    presentes* lista=NULL;
     FILE* artefato;
     artefato = fopen("artefato.txt", "r");
     if (artefato == NULL) {
@@ -21,7 +21,7 @@ int main () {
             //printf("Entrou no while\n");
             if (head == NULL) {
             //printf("Entrou no if\n");
-                head = (presenca*)malloc(sizeof(presenca));
+                head = (presentes*)malloc(sizeof(presentes));
                 fscanf(artefato, "%s\n", head->email);
                 lista=head;
                 head->next=NULL;
@@ -31,7 +31,7 @@ int main () {
                 while (lista->next != NULL) {
                     lista=lista->next;
                 }
-                lista->next = (presenca*)malloc(sizeof(presenca));
+                lista->next = (presentes*)malloc(sizeof(presentes));
                 lista = lista->next;
                 fscanf(artefato, "%s\n", lista->email);
                 //printf(lista->email);
