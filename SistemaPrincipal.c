@@ -5,9 +5,10 @@
 #include "bibliotecaFready.h"
 
 //Responsável por contar as horas de cada estudando
-//recebe o arquivo "ata.txt", salva um arquivo "presentes.txt" para todos os presentes e gera um arquivo "presenca.txt" para todos que concluiram sua jornada de trabalho.
+//recebe o arquivo "ata.txt", salva um arquivo "presentes.txt" para todos os presentes e gera um arquivo "presenca.txt" para dar baixa nas presencas.
 
 void enviarpresentes(presenca* cabeca);
+void baixapresentes(char email[20], time_t entrada,time_t saida);
 
 int main () {
     presenca *Head=NULL;
@@ -42,32 +43,16 @@ int main () {
                 cabeca->next=NULL;
             }else{ //Aqui identificamos que ele está na lista, pois não é o último. Queremos adicionar ele no banco de dados e eliminá-lo
                 if(anterior==NULL && cabeca->next==NULL){ //Se só houver um item na lista, ele irá limpar a lista
-                    FILE* presenca; //lista que define a conclusão do turno de trabalho
-                    presenca=fopen("presenca.txt","w");
-                    fprintf(presenca, "%s\n", verificador->email);
-                    fprintf(presenca, "%ld\n", cabeca->tempo);
-                    fprintf(presenca, "%ld\n", verificador->tempo);
-                        fclose(presenca);
-                        free(verificador);
+                    baixapresentes(verificador->email,cabeca->tempo,verificador->tempo);
+                    free(verificador);
                 }else if (anterior==NULL && cabeca->next!=NULL){
-                    FILE* presenca; //lista que define a conclusão do turno de trabalho
-                    presenca=fopen("presenca.txt","w");
-                    fprintf(presenca, "%s\n", verificador->email);
-                    printf("%s\n",verificador->email);
-                    fprintf(presenca, "%ld\n", cabeca->tempo);
-                    fprintf(presenca, "%ld\n", verificador->tempo);
-                    fclose(presenca);
-                        free(verificador);
-                        Head=cabeca->next;
-                        free(cabeca);
+                    baixapresentes(verificador->email,cabeca->tempo,verificador->tempo);
+                    free(verificador);
+                    Head=cabeca->next;
+                    free(cabeca);
 
                 }else{ //Se não, apenas trocará a sequência e limpara o valor. Os valores de seus horários serão exportados em txt.
-                    FILE* presenca; //lista que define a conclusão do turno de trabalho
-                    presenca=fopen("presenca.txt","w");
-                    fprintf(presenca, "%s\n", verificador->email);
-                    fprintf(presenca, "%ld\n", cabeca->tempo);
-                    fprintf(presenca, "%ld\n", verificador->tempo);
-                    fclose(presenca);
+                    baixapresentes(verificador->email,cabeca->tempo,verificador->tempo);
                     free(verificador);
                         verificador=cabeca;
                         anterior->next=cabeca->next;
@@ -91,4 +76,13 @@ void enviarpresentes(presenca* cabeca){
         aux=aux->next;
     }
     fclose(presente);
+}
+
+void baixapresentes(char email[20], time_t entrada,time_t saida){
+    FILE* presenca; //lista que define a conclusão do turno de trabalho
+    presenca=fopen("presenca.txt","w");
+    fprintf(presenca, "%s\n", email);
+    fprintf(presenca, "%ld\n", entrada);
+    fprintf(presenca, "%ld\n", saida);
+    fclose(presenca);
 }
