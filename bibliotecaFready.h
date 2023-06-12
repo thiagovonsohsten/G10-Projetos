@@ -266,6 +266,7 @@ void lg_medico(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_
     printf("Bem Vindo Preceptor\n");
     lista_medico* Medico=lista_de_medicos; //Lista de médicos cadastrados
     lista_aluno* lista_alunos_do_preceptor=NULL; //Lista que salvará todos os alunos ligados a ele
+    //encontrar o medico na lista
     while (strcmp(Medico->preceptor->email,email)!=0 || Medico==NULL){
         Medico=Medico->next;
     }
