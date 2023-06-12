@@ -19,6 +19,14 @@ typedef struct precensa{
     struct precensa *next;
 }precensa;
 
+//tipo de senha
+typedef struct senhassalvas {
+    char email[100];
+    char senha[100];
+    char papel [10];
+    struct senhassalvas* next;
+}senhassalvas;
+
 //lista para o histórico de cada preceptor
 typedef struct historico{
     time_t entrada;
@@ -75,6 +83,7 @@ typedef struct lista_adm {
 }lista_adm;
 
 void trocar_senha(char email[20]){
+    //email será usado para buscar a senha do preceptor.
     char senha_antiga[100],senha_nova[100],senha_Verificador[100];
     printf("\n--- Trocar Senha ---\n");  
     printf("Digite a Senha Antiga:");
@@ -94,6 +103,62 @@ void trocar_senha(char email[20]){
         getchar();
     }else {
         printf("Senhas Incorretas!\n");
+    }
+}
+
+int verificadordesenhas(char login[20],char senha [20]){
+    senhassalvas* lista_senhas = NULL;
+    senhassalvas* aux = NULL;
+    //importar as senhas para uma lista
+    FILE* senhasBC;
+    senhasBC = fopen("senhasBC.txt","r");
+    while (!feof(senhasBC)){
+        //printf("cirulo do while\n");
+        if (lista_senhas==NULL){
+            lista_senhas=(senhassalvas *)malloc(sizeof(senhassalvas));
+            fscanf(senhasBC, "%s\n", lista_senhas->email);
+            fscanf(senhasBC, "%s\n", lista_senhas->senha);
+            fscanf(senhasBC, "%s\n", lista_senhas->papel);
+            lista_senhas->next=NULL;
+            //printf("Login: %s\n",lista_senhas->email);
+            //printf("Papel: %s\n",lista_senhas->papel);
+            //printf("Senha: %s\n",lista_senhas->senha);
+        }else{
+            aux = lista_senhas;
+            while (aux->next!=NULL){
+                // printf("Login: %s\n",aux->email);
+                // printf("Papel: %s\n",aux->papel);
+                // printf("Senha: %s\n",aux->senha);
+                aux=aux->next;
+            }
+            aux->next=(senhassalvas *)malloc(sizeof(senhassalvas));
+            aux=aux->next;
+            fscanf(senhasBC, "%s\n", aux->email);
+            fscanf(senhasBC, "%s\n", aux->senha);
+            fscanf(senhasBC, "%s\n", aux->papel);
+            aux->next=NULL;
+        }
+    }
+    fclose(senhasBC);
+    //finalizacao de importacao de senhas
+    aux=lista_senhas;
+    while (strcmp(login,aux->email)!=0){
+        //printf("passando a lista das senhas...\n");
+        if (aux->next==NULL){
+            return 4;
+        }
+        aux=aux->next;
+    }
+    if (strcmp(aux->senha,senha)==0){
+        if (strcmp(aux->papel,"residente")==0){
+            return 1;
+        }else if (strcmp(aux->papel,"preceptor")==0){
+            return 2;
+        }else {
+            return 3;
+        }
+    }else {
+        return 0;
     }
 }
 

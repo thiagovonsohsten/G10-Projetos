@@ -5,13 +5,6 @@
 #include "bibliotecaFready.h"
 
 //vai pegar o "login.txt" e comparar com "senhasBC.txt" e usar o "banco_de_dados.txt" para buscar os dados do usuário no APP
-typedef struct senhassalvas {
-    char email[100];
-    char senha[100];
-    char papel [10];
-    struct senhassalvas* next;
-}senhassalvas;
-
 int main (){
 //ABRIR ARQUIVO PARA SIMULAR O BANCO DE DADOS
     char comp_email[100];
@@ -175,10 +168,9 @@ int main (){
     
 //Com o Banco de Dados no sistema, segue o código.
 
-    senhassalvas* lista_senhas = NULL;
-    senhassalvas* aux = NULL;
     char conta[100];
     char senha[100];
+    int papel; //1 residente 2 preceptor 3 adm
     FILE* login;
     login = fopen("login.txt", "r");
     fscanf(login, "%s\n", conta);
@@ -186,59 +178,23 @@ int main (){
     fscanf(login, "%s\n", senha);
     //printf("Senha:%s\n",senha);
     fclose(login);
-    FILE* senhasBC;
-    senhasBC = fopen("senhasBC.txt","r");
-    while (!feof(senhasBC)){
-        //printf("cirulo do while\n");
-        if (lista_senhas==NULL){
-            lista_senhas=(senhassalvas *)malloc(sizeof(senhassalvas));
-            fscanf(senhasBC, "%s\n", lista_senhas->email);
-            fscanf(senhasBC, "%s\n", lista_senhas->senha);
-            fscanf(senhasBC, "%s\n", lista_senhas->papel);
-            lista_senhas->next=NULL;
-            //printf("Login: %s\n",lista_senhas->email);
-            //printf("Papel: %s\n",lista_senhas->papel);
-            //printf("Senha: %s\n",lista_senhas->senha);
-        }else{
-            aux = lista_senhas;
-            while (aux->next!=NULL){
-                // printf("Login: %s\n",aux->email);
-                // printf("Papel: %s\n",aux->papel);
-                // printf("Senha: %s\n",aux->senha);
-                aux=aux->next;
-            }
-            aux->next=(senhassalvas *)malloc(sizeof(senhassalvas));
-            aux=aux->next;
-            fscanf(senhasBC, "%s\n", aux->email);
-            fscanf(senhasBC, "%s\n", aux->senha);
-            fscanf(senhasBC, "%s\n", aux->papel);
-            aux->next=NULL;
-        }
-    }
-    fclose(senhasBC);
-    aux=lista_senhas;
-    while (strcmp(conta,aux->email)!=0){
-        //printf("passando a lista das senhas...\n");
-        if (aux->next==NULL){
-            break;
-        }
-        aux=aux->next;
-    }
-    if (aux==NULL){
-        printf("Login nao existe!\n");
+    papel = verificadordesenhas(conta,senha);
+
+    if (papel==0){
+        printf("Senha nao existe!\n");
     }else{
-        if (strcmp(senha,aux->senha)==0){
-            printf("Login efetuado, carregando dados...\n"); //aux -> senha/email/papel
-            if (strcmp(aux->papel,"residente")==0){
-                lg_residente(aux->email, alunos_cadastrados);
-            }else if (strcmp(aux->papel,"preceptor")==0){
-                 lg_medico(aux->email,alunos_cadastrados,medicos_cadastrados);
-            }else if (strcmp(aux->papel,"lg_adm")==0){
-                lg_adm(aux->email,alunos_cadastrados,medicos_cadastrados,adms_cadastrados);
+            if (papel==1){
+                printf("Login do residente efetuado, carregando dados...\n"); //aux -> senha/email/papel
+                lg_residente(conta, alunos_cadastrados);
+            }else if (papel==2){
+                printf("Login do preceptor efetuado, carregando dados...\n"); //aux -> senha/email/papel
+                 lg_medico(conta,alunos_cadastrados,medicos_cadastrados);
+            }else if (papel==3){
+                printf("Login do ADM efetuado, carregando dados...\n"); //aux -> senha/email/papel
+                lg_adm(conta,alunos_cadastrados,medicos_cadastrados,adms_cadastrados);
         }else {
-            printf("Senha Incorreta!\n");
+            printf("Login Incorreta!\n");
         }
-    }
     }
     return 0;
 }
