@@ -377,10 +377,10 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
     lista_aluno* auxAlunos; //Lista que salvará todos os alunos
     lista_medico* auxMedicos; //Lista que salvará todos os preceptores
 //buscar os dados do adm
-    while (strcmp(Adm->administrador->email,email)!=0 || Adm==NULL){
-        Adm=Adm->next;
+    while (strcmp(auxAdm->administrador->email,email)!=0 || auxAdm==NULL){
+        auxAdm=auxAdm->next;
     }
-    if (Adm==NULL){
+    if (auxAdm==NULL){
         printf("Erro ao localizar usuario!\n");
         return;
     }
@@ -399,26 +399,26 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
             if(subpagina==1){ //criar residente, preceptor e adm
                 int a;
                 //Adicionaro no arquivo "senhasBC.txt" e no "banco_de_dados.txt" e opções de pesquisa @@G10@@
-                char nome[100],email[20], cpf[12],papel[10],preceptor[20],especializacao[20],CRM[20];
+                char nome1[100],email1[20], cpf1[12],papel1[10],preceptor1[20],especializacao1[20],CRM1[20];
                 printf("Qual o nome:\n");
                 getchar();
-                fgets(nome,sizeof(nome),stdin);
+                fgets(nome1,sizeof(nome1),stdin);
                 printf("Qual o email:\n");
                 getchar();
-                fgets(email,sizeof(email),stdin); 
+                fgets(email1,sizeof(email1),stdin); 
                 printf("Qual o CPF:\n");
                 getchar();
-                fgets(cpf,sizeof(cpf),stdin); 
+                fgets(cpf1,sizeof(cpf1),stdin); 
                 printf("Qual o papel:\n");
                 getchar();
-                fgets(papel,sizeof(papel),stdin);
-                if (strcmp(papel,"residente")==0){ //criar residente
+                fgets(papel1,sizeof(papel1),stdin);
+                if (strcmp(papel1,"residente\n")==0){ //criar residente
                     printf("Qual o preceptor?\n");
                     getchar();
-                    fgets(preceptor,sizeof(preceptor),stdin);
+                    fgets(preceptor1,sizeof(preceptor1),stdin);
                     printf("Qual a especialização?\n");
                     getchar();
-                    fgets(especializacao,sizeof(especializacao),stdin);
+                    fgets(especializacao1,sizeof(especializacao1),stdin);
                     printf("Deseja Salva?\n1)Sim\t2)Nao");
                     scanf("%d",&a);
                     if(a==1){
@@ -429,22 +429,22 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
                         auxAlunos->next=(lista_aluno *)malloc(sizeof(lista_aluno));
                         auxAlunos=auxAlunos->next;
                         auxAlunos->next=NULL;
-                        strcpy(auxAlunos->aluno->nome,nome);
-                        strcpy(auxAlunos->aluno->email,email);
-                        strcpy(auxAlunos->aluno->cpf,cpf);
-                        strcpy(auxAlunos->aluno->papel,papel);
-                        strcpy(auxAlunos->aluno->email_preceptor,preceptor);
-                        strcpy(auxAlunos->aluno->especializacao,especializacao);
+                        strcpy(auxAlunos->aluno->nome,nome1);
+                        strcpy(auxAlunos->aluno->email,email1);
+                        strcpy(auxAlunos->aluno->cpf,cpf1);
+                        strcpy(auxAlunos->aluno->papel,papel1);
+                        strcpy(auxAlunos->aluno->email_preceptor,preceptor1);
+                        strcpy(auxAlunos->aluno->especializacao,especializacao1);
                     }else if (a==2){
                         printf("Voltando para Pagina Principal...");
                     }
-                }else if (strcmp(papel,"preceptor")==0){
+                }else if (strcmp(papel1,"preceptor")==0){
                     printf("Qual o CRM?\n");
                     getchar();
-                    fgets(CRM,sizeof(CRM),stdin);
+                    fgets(CRM1,sizeof(CRM1),stdin);
                     printf("Qual a especialização?\n");
                     getchar();
-                    fgets(especializacao,sizeof(especializacao),stdin);
+                    fgets(especializacao1,sizeof(especializacao1),stdin);
                     printf("Deseja Salva?\n1)Sim\t2)Nao");
                     scanf("%d",&a);
                     if(a==1){
@@ -455,16 +455,16 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
                         auxMedicos->next=(lista_medico *)malloc(sizeof(lista_medico));
                         auxMedicos=auxMedicos->next;
                         auxMedicos->next=NULL;
-                        strcpy(auxMedicos->preceptor->nome,nome);
-                        strcpy(auxMedicos->preceptor->email,email);
-                        strcpy(auxMedicos->preceptor->cpf,cpf);
-                        strcpy(auxMedicos->preceptor->papel,papel);
-                        strcpy(auxMedicos->preceptor->CRM,CRM);
-                        strcpy(auxMedicos->preceptor->papel,especializacao);
+                        strcpy(auxMedicos->preceptor->nome,nome1);
+                        strcpy(auxMedicos->preceptor->email,email1);
+                        strcpy(auxMedicos->preceptor->cpf,cpf1);
+                        strcpy(auxMedicos->preceptor->papel,papel1);
+                        strcpy(auxMedicos->preceptor->CRM,CRM1);
+                        strcpy(auxMedicos->preceptor->papel,especializacao1);
                     }else if (a==2){
                         printf("Voltando para Pagina Principal...");
                     }
-                }else if (strcmp(papel,"adm")==0){
+                }else if (strcmp(papel1,"adm")==0){
                     printf("Deseja Salva?\n1)Sim\t2)Nao");
                     scanf("%d",&a);
                     if(a==1){
@@ -475,10 +475,10 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
                         auxAdm->next=(lista_adm *)malloc(sizeof(lista_adm));
                         auxAdm=auxAdm->next;
                         auxAdm->next=NULL;
-                        strcpy(auxAdm->preceptor->nome,nome);
-                        strcpy(auxAdm->preceptor->email,email);
-                        strcpy(auxAdm->preceptor->cpf,cpf);
-                        strcpy(auxAdm->preceptor->papel,papel);
+                        strcpy(auxAdm->administrador->nome,nome1);
+                        strcpy(auxAdm->administrador->email,email1);
+                        strcpy(auxAdm->administrador->cpf,cpf1);
+                        strcpy(auxAdm->administrador->papel,papel1);
                     }else if (a==2){
                         printf("Voltando para Pagina Principal...");
                     }
@@ -488,45 +488,73 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
             }else if (subpagina==2){
                 //listas - lista_de_alunos e lista_de_medicos
                 int x;
-                printf("Deseja buscar um Residente ou um Preceptor?\n1) Residente\t2) Preceptor");
+                printf("Deseja buscar um Residente ou um Preceptor?\n1) Residente\t2) Preceptor\n");
                 scanf("%d",&x);
                 int k;
                 printf("Deseja buscar por:\n1) Nome\t2) Email\t3)CPF\n");
                 scanf("%d",&k);
                 printf("Escreva: \n");
+                getchar();
                 char incremento[100];
                 fgets(incremento,sizeof(incremento),stdin);
+                incremento[strcspn(incremento, "\n")] = '\0';
+                auxAlunos=lista_de_alunos;
+                auxMedicos=lista_de_medicos;
                 if (k==1){
-                    auxAlunos=lista_de_alunos;
-                    while (strcmp(auxAlunos->aluno->nome,incremento)!=0 || auxAlunos!=NULL){
-                        auxAlunos=auxAlunos->next;
+                    while (strcmp(auxAlunos->aluno->nome,incremento)!=0){
+                        if (auxAlunos->next!=NULL){
+                            auxAlunos=auxAlunos->next;
+                        }else {
+                            auxAlunos=NULL;
+                            break;
+                        }
                     }
-                    auxMedicos=lista_de_medicos;
-                    while (strcmp(auxMedicos->preceptor->nome,incremento)!=0 || auxMedicos!=NULL){
-                        auxMedicos=auxMedicos->next;
+                    while (strcmp(auxMedicos->preceptor->nome,incremento)!=0){
+                        if (auxMedicos->next!=NULL){
+                            auxMedicos=auxMedicos->next;
+                        }else {
+                            auxMedicos=NULL;
+                            break;
+                        }
                     }
                 }else if (k==2){
-                    auxAlunos=lista_de_alunos;
-                    while (strcmp(auxAlunos->aluno->email,incremento)!=0 || auxAlunos!=NULL){
-                        auxAlunos=auxAlunos->next;
+                    while (strcmp(auxAlunos->aluno->email,incremento)!=0){
+                        if (auxAlunos->next!=NULL){
+                            auxAlunos=auxAlunos->next;
+                        }else {
+                            auxAlunos=NULL;
+                            break;
+                        }
                     }
-                    auxMedicos=lista_de_medicos;
-                    while (strcmp(auxMedicos->preceptor->email,incremento)!=0 || auxMedicos!=NULL){
-                        auxMedicos=auxMedicos->next;
+                    while (strcmp(auxMedicos->preceptor->email,incremento)!=0){
+                        if (auxMedicos->next!=NULL){
+                            auxMedicos=auxMedicos->next;
+                        }else {
+                            auxMedicos=NULL;
+                            break;
+                        }
                     }
                 }else {
-                    auxAlunos=lista_de_alunos;
-                    while (strcmp(auxAlunos->aluno->cpf,incremento)!=0 || auxAlunos!=NULL){
-                        auxAlunos=auxAlunos->next;
+                    while (strcmp(auxAlunos->aluno->cpf,incremento)!=0 && auxAlunos!=NULL){
+                        if (auxAlunos->next!=NULL){
+                            auxAlunos=auxAlunos->next;
+                        }else {
+                            auxAlunos=NULL;
+                            break;
+                        }
                     }
-                    auxMedicos=lista_de_medicos;
-                    while (strcmp(auxMedicos->preceptor->cpf,incremento)!=0 || auxMedicos!=NULL){
-                        auxMedicos=auxMedicos->next;
+                    while (strcmp(auxMedicos->preceptor->cpf,incremento)!=0 && auxMedicos!=NULL){
+                        if (auxMedicos->next!=NULL){
+                            auxMedicos=auxMedicos->next;
+                        }else {
+                            auxMedicos=NULL;
+                            break;
+                        }
                     }
                 }
                 if (x==1){
                         if (auxAlunos==NULL){
-                            printf("Aluno não existe\n");
+                            printf("Aluno nao existe\n");
                             printf("Retornando a Pagina Principal\n");
                         }else{
                             printf("\n--- Vizualizar Dados ---\n");   
@@ -538,7 +566,7 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
                             printf("Historico de presencas:\n");
                             int n=1;
                             while(auxAlunos->aluno->lista_de_Presenca->next!=NULL){
-                                printf("Presenca: %d\n\tEntrada: %ld\n\tSaida: %ld\n", n, auxAlunos->aluno->lista_de_Presenca->entrada, Residente->aluno->lista_de_Presenca->saida);
+                                printf("Presenca: %d\n\tEntrada: %ld\n\tSaida: %ld\n", n, auxAlunos->aluno->lista_de_Presenca->entrada, auxAlunos->aluno->lista_de_Presenca->saida);
                                 if (auxAlunos->aluno->lista_de_Presenca->next!=NULL){ //problema por criar a lista antes de verificar se tem próximo
                                 auxAlunos->aluno->lista_de_Presenca=auxAlunos->aluno->lista_de_Presenca->next;
                                 }else {
@@ -557,12 +585,16 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
                         printf("E-mail: %s\n", auxMedicos->preceptor->email);
                         printf("CRM: %s\n", auxMedicos->preceptor->CRM);
                         printf("Especializacao: %s\n", auxMedicos->preceptor->especializacao);
-                        printf("Aperter qualquer tecla para ir ao menu!");
+                        printf("Aperter qualquer tecla para ir ao menu!\n");
                         getchar();
                         getchar();
                     }
             }else if (subpagina==3){
                 //mostrar dados estatísticos
+                printf("Aqui poderá ser vizualizado os dados estatísticos das presenças e dos preseceptores!\n");
+                printf("Aperter qualquer tecla para ir ao menu!\n");
+                        getchar();
+                        getchar();
             }else{
                 printf("Valor invaido!\n");
             }
