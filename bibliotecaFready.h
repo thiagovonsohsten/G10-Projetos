@@ -465,16 +465,102 @@ void lg_adm(char email[20], lista_aluno* lista_de_alunos,lista_medico* lista_de_
                         printf("Voltando para Pagina Principal...");
                     }
                 }else if (strcmp(papel,"adm")==0){
-
+                    printf("Deseja Salva?\n1)Sim\t2)Nao");
+                    scanf("%d",&a);
+                    if(a==1){
+                        auxAdm=lista_de_adm;
+                        while(auxAdm->next!=NULL){
+                            auxAdm=auxAdm->next;
+                        }
+                        auxAdm->next=(lista_adm *)malloc(sizeof(lista_adm));
+                        auxAdm=auxAdm->next;
+                        auxAdm->next=NULL;
+                        strcpy(auxAdm->preceptor->nome,nome);
+                        strcpy(auxAdm->preceptor->email,email);
+                        strcpy(auxAdm->preceptor->cpf,cpf);
+                        strcpy(auxAdm->preceptor->papel,papel);
+                    }else if (a==2){
+                        printf("Voltando para Pagina Principal...");
+                    }
                 }else {
                     printf("Papel inexistente!\n");
                 }
-                auxAlunos=lista_de_alunos;
-                auxMedicos=lista_de_medicos;
-                auxAdm=lista_de_adm;
-
             }else if (subpagina==2){
                 //listas - lista_de_alunos e lista_de_medicos
+                int x;
+                printf("Deseja buscar um Residente ou um Preceptor?\n1) Residente\t2) Preceptor");
+                scanf("%d",&x);
+                int k;
+                printf("Deseja buscar por:\n1) Nome\t2) Email\t3)CPF\n");
+                scanf("%d",&k);
+                printf("Escreva: \n");
+                char incremento[100];
+                fgets(incremento,sizeof(incremento),stdin);
+                if (k==1){
+                    auxAlunos=lista_de_alunos;
+                    while (strcmp(auxAlunos->aluno->nome,incremento)!=0 || auxAlunos!=NULL){
+                        auxAlunos=auxAlunos->next;
+                    }
+                    auxMedicos=lista_de_medicos;
+                    while (strcmp(auxMedicos->preceptor->nome,incremento)!=0 || auxMedicos!=NULL){
+                        auxMedicos=auxMedicos->next;
+                    }
+                }else if (k==2){
+                    auxAlunos=lista_de_alunos;
+                    while (strcmp(auxAlunos->aluno->email,incremento)!=0 || auxAlunos!=NULL){
+                        auxAlunos=auxAlunos->next;
+                    }
+                    auxMedicos=lista_de_medicos;
+                    while (strcmp(auxMedicos->preceptor->email,incremento)!=0 || auxMedicos!=NULL){
+                        auxMedicos=auxMedicos->next;
+                    }
+                }else {
+                    auxAlunos=lista_de_alunos;
+                    while (strcmp(auxAlunos->aluno->cpf,incremento)!=0 || auxAlunos!=NULL){
+                        auxAlunos=auxAlunos->next;
+                    }
+                    auxMedicos=lista_de_medicos;
+                    while (strcmp(auxMedicos->preceptor->cpf,incremento)!=0 || auxMedicos!=NULL){
+                        auxMedicos=auxMedicos->next;
+                    }
+                }
+                if (x==1){
+                        if (auxAlunos==NULL){
+                            printf("Aluno não existe\n");
+                            printf("Retornando a Pagina Principal\n");
+                        }else{
+                            printf("\n--- Vizualizar Dados ---\n");   
+                            printf("Nome: %s\n", auxAlunos->aluno->nome);
+                            printf("CPF: %s\n", auxAlunos->aluno->cpf);
+                            printf("E-mail: %s\n", auxAlunos->aluno->email);
+                            printf("E-mail do Preceptor: %s\n", auxAlunos->aluno->email_preceptor);
+                            printf("Especializacao: %s\n", auxAlunos->aluno->especializacao);
+                            printf("Historico de presencas:\n");
+                            int n=1;
+                            while(auxAlunos->aluno->lista_de_Presenca->next!=NULL){
+                                printf("Presenca: %d\n\tEntrada: %ld\n\tSaida: %ld\n", n, auxAlunos->aluno->lista_de_Presenca->entrada, Residente->aluno->lista_de_Presenca->saida);
+                                if (auxAlunos->aluno->lista_de_Presenca->next!=NULL){ //problema por criar a lista antes de verificar se tem próximo
+                                auxAlunos->aluno->lista_de_Presenca=auxAlunos->aluno->lista_de_Presenca->next;
+                                }else {
+                                    auxAlunos->aluno->lista_de_Presenca->next=NULL;
+                                }
+                                n++;
+                            }
+                            printf("Aperter qualquer tecla para ir a Pagina Principal!");
+                            getchar();
+                            getchar();
+                        }
+                    }else {
+                        printf("\n--- Vizualizar Dados ---\n");   
+                        printf("Nome: %s\n", auxMedicos->preceptor->nome);
+                        printf("CPF: %s\n", auxMedicos->preceptor->cpf);
+                        printf("E-mail: %s\n", auxMedicos->preceptor->email);
+                        printf("CRM: %s\n", auxMedicos->preceptor->CRM);
+                        printf("Especializacao: %s\n", auxMedicos->preceptor->especializacao);
+                        printf("Aperter qualquer tecla para ir ao menu!");
+                        getchar();
+                        getchar();
+                    }
             }else if (subpagina==3){
                 //mostrar dados estatísticos
             }else{
